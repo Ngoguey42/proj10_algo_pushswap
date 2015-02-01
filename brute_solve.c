@@ -1,5 +1,21 @@
 
 #include <ps.h>
+#define MAX_BRUTE_LVL 8
+
+#define RA_EX	(-1 - RB - RRA - RRR)
+#define RB_EX	(-1 - RA - RRB - RRR)
+#define RR_EX	(-1 - RRA - RRB - RRR)
+#define RRA_EX	(-1 - RA - RRB - RR)
+#define RRB_EX	(-1 - RB - RRA - RR)
+#define RRR_EX	(-1 - RA - RB - RR)
+#define PA_EX	(-1 - PB)
+#define PB_EX	(-1 - PA)
+#define S_EX	(-1 - SA - SB - SS)
+
+#define A_IS_0_1	(-1 - SS - SA - PB - RRR - RR - RA - RRA)
+#define B_IS_0		(-1 - SS - SB - PA - RRR - RR - RB - RRB)
+#define B_IS_1		(-1 - SS - SB      - RRR - RR - RB - RRB)
+
 
 // ra,		0
 // rb,		1
@@ -19,7 +35,7 @@
 */
 
 static void			fill_exclusions(PS_TYPE asz, PS_TYPE bsz, t_action pac,
-				unsigned short *exclusions)
+						unsigned short *exclusions)
 {
 	if (pac == ra)
 		*exclusions = RA_EX;
@@ -40,11 +56,11 @@ static void			fill_exclusions(PS_TYPE asz, PS_TYPE bsz, t_action pac,
 	else if (pac != none)
 		*exclusions = S_EX;
 	if (asz <= 1)
-		*exclusions &= A_TOO_SMALL;
+		*exclusions &= A_IS_0_1;
 	if (bsz == 1)
-		*exclusions &= B_TOO_SMALL;
+		*exclusions &= B_IS_1;
 	else if (bsz == 0)
-		*exclusions &= B_EMPTY;
+		*exclusions &= B_IS_0;
 	return ;
 }
 

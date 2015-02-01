@@ -17,21 +17,6 @@
 # define SB 0b01000000000
 # define SS 0b10000000000
 
-# define RA_EX (-1 - RB - RRA - RRR)
-# define RB_EX (-1 - RA - RRB - RRR)
-# define RR_EX (-1 - RRA - RRB - RRR)
-# define RRA_EX (-1 - RA - RRB - RR)
-# define RRB_EX (-1 - RB - RRA - RR)
-# define RRR_EX (-1 - RA - RB - RR)
-# define PA_EX (-1 - PB)
-# define PB_EX (-1 - PA)
-# define S_EX (-1 - SA - SB - SS)
-
-# define A_TOO_SMALL (-1 - SS - SA - PB - RRR - RR - RA - RRA)
-# define B_EMPTY     (-1 - SS - SB - PA - RRR - RR - RB - RRB)
-# define B_TOO_SMALL (-1 - SS - SB      - RRR - RR - RB - RRB)
-
-#define MAX_BRUTE_LVL 8
 #define PS_TYPE unsigned short
 
 typedef struct	s_pslist
