@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:44:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/02 12:13:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/02 14:47:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,11 @@ static t_bool		next_lvl(t_brute *datas, char lvl, t_action pac)
 	return (false);
 }
 
-t_bool				ps_brute_solve_lvl(t_brute *datas, char lvl, t_action ac)
+inline t_bool				ps_brute_solve_lvl(t_brute *datas, char lvl, t_action ac)
 {
 	apply_actions(datas->list, ac);
 	if (lvl == datas->maxl)
 	{
-/* 		qprintf("==>\n"); */
-/* 		print_list(datas->list); */
-/* 		qprintf("<==\n"); */
 		if (is_solved(datas->list) == true)
 			return (save_step(datas->sol, &ac));
 		rev_actions(datas->list, ac);
@@ -111,7 +108,7 @@ t_bool				ps_brute_solve_lvl(t_brute *datas, char lvl, t_action ac)
 	rev_actions(datas->list, ac);
 	return (false);
 }
-#define MAX_BRUTE_LVL 11
+#define MAX_BRUTE_LVL 10
 
 int					ps_brute_solve(t_pslist *orig, t_list *solution[1])
 {
@@ -128,13 +125,14 @@ int					ps_brute_solve(t_pslist *orig, t_list *solution[1])
 		if (ps_brute_solve_lvl(&datas, 0, none) == true)
 		{
 			i = MAX_BRUTE_LVL;
-			qprintf("true.\n");
+/* 			qprintf("true.\n"); */
 		}
 		else
 		{
-			qprintf("false.\n");
+			
+/* 			qprintf("false.\n"); */
 		}
-		print_list(datas.list);
+/* 		print_list(datas.list); */
 		free(datas.list);
 		i++;
 	}

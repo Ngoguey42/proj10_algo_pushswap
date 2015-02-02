@@ -6,11 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:52:15 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/02 10:52:15 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/02 15:10:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ps.h>
+#include <string.h>
 
 void		apply_actions_r(t_pslist *list, t_action ac)
 {

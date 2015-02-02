@@ -6,12 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:50:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/02 11:56:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/02 14:51:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ps.h>
 #include <stdlib.h>
+#include <string.h>
 
 t_bool		is_solved(const t_pslist *list)
 {
