@@ -1,36 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/02/02 12:05:46 by ngoguey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <ps.h>
 #include <stdlib.h>
 
+
+static const t_pslist	*create_solved_ref(PS_TYPE len)
+{
+	t_pslist	ret;
+	t_pslist	*retp;
+	PS_TYPE		i;
+
+	ret.asz = len;
+	ret.a = (PS_TYPE*)malloc(len * sizeof(PS_TYPE));
+	ret.b = NULL;
+	ret.bsz = 0;
+	i = 0;
+	while (i++ < len)
+		ret.a[i - 1] = i;
+	retp = (t_pslist*)ft_memdup(&ret, sizeof(t_pslist));
+	print_list(retp);
+	return ((const t_pslist*)retp);
+}
+
 int			main(void)
 {
-	t_list	*solutions[1];
-	t_pslist	orig;
+	PS_TYPE		origin[] = {4, 2, 3, 1};
+/* 	PS_TYPE		origin[] = {7, 2, 3, 6, 1, 4, 5}; */
+	PS_TYPE		len;
+	t_pslist	*origin_a;
+	t_list		*sol[1];
 
-	PS_TYPE	*solved;
-	
-	solved = malloc(sizeof(PS_TYPE) * 8);
-	solved[0] = 1;
-	solved[1] = 2;
-	solved[2] = 3;
-	solved[3] = 4;
-	solved[4] = 5;
-	solved[5] = 6;
-	// solved[6] = 7;
-	// solved[7] = 8;
-	(void)is_solved(&(t_pslist){solved, 6, NULL, 0});
-	
-	orig.a = ft_memalloc(sizeof(PS_TYPE) * 7);
-	orig.b = ft_memalloc(sizeof(PS_TYPE) * 7);
-	orig.bsz = 2;
-	orig.asz = 4;
-	orig.a[0] = 4;
-	orig.a[1] = 3;
-	orig.a[2] = 2;
-	orig.a[3] = 1;
-	
-	orig.b[0] = 6;
-	orig.b[1] = 5;
-	ps_brute_solve(orig, solutions);
+	len = sizeof(origin) / sizeof(PS_TYPE);
+	(void)is_solved(create_solved_ref(len));
+	origin_a = (t_pslist*)ft_memalloc(sizeof(t_pslist));
+	origin_a->a = (PS_TYPE*)ft_memdup(origin, len * sizeof(PS_TYPE));
+	origin_a->b = (PS_TYPE*)ft_memalloc(len * sizeof(PS_TYPE));
+	origin_a->asz = len;
+	print_list(origin_a);
+	*sol = NULL;
+	(void)ps_brute_solve(origin_a, sol);
+	ps_print_sol(*sol);
 	return (0);
 }

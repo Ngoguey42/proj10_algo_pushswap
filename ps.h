@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/02/02 11:41:04 by ngoguey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PS_H
 # define PS_H
@@ -43,6 +54,13 @@ typedef enum	e_action
 	none
 }				t_action;
 
+typedef struct	s_brute
+{
+	t_pslist	*list;
+	t_list		*sol[1];
+	PS_TYPE		maxl;
+}				t_brute;
+
 /*
 ** Tools
 */
@@ -63,14 +81,18 @@ void			apply_actions_r(t_pslist *list, t_action ac);
 /*
 ** Brute solve
 */
-t_bool			ps_brute_solve_lvl(t_pslist *list, t_list *sol[1],
-					char lvl, t_action ac);
-int				ps_brute_solve(t_pslist orig, t_list *solution[1]);
+/* t_bool			ps_brute_solve_lvl(t_pslist *list, t_list *sol[1], */
+/* 					char lvl, t_action ac); */
+int				ps_brute_solve(t_pslist *orig, t_list *solution[1]);
+t_bool			ps_brute_solve_lvl(t_brute *datas, char lvl, t_action ac);
+
 
 /*
 ** Debug
 */
 const char		*action_name(t_action action);
 void			print_list(const t_pslist *list);
+void			ps_print_sol(const t_list *solutions);
+
 
 #endif

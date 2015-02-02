@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   brute_solve.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/02/02 10:44:54 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/02/02 12:04:30 by ngoguey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <ps.h>
-#define MAX_BRUTE_LVL 8
+#include <stdlib.h>
 
 #define RA_EX	(-1 - RB - RRA - RRR)
 #define RB_EX	(-1 - RA - RRB - RRR)
@@ -15,7 +26,6 @@
 #define A_IS_0_1	(-1 - SS - SA - PB - RRR - RR - RA - RRA)
 #define B_IS_0		(-1 - SS - SB - PA - RRR - RR - RB - RRB)
 #define B_IS_1		(-1 - SS - SB      - RRR - RR - RB - RRB)
-
 
 // ra,		0
 // rb,		1
@@ -64,18 +74,18 @@ static void			fill_exclusions(PS_TYPE asz, PS_TYPE bsz, t_action pac,
 	return ;
 }
 
-static t_bool		next_lvl(t_pslist *list, t_list *sol[1], char lvl, t_action pac)
+static t_bool		next_lvl(t_brute *datas, char lvl, t_action pac)
 {
 	t_action		ac;
 	unsigned short	exclusions;
 
 	exclusions = -1;
-	fill_exclusions(list->asz, list->bsz, pac, &exclusions);
+	fill_exclusions(datas->list->asz, datas->list->bsz, pac, &exclusions);
 	ac = 0;
 	while (ac <= ss)
 	{
 		// qprintf("while: %3s auth(%hd)\n", action_name(ac), (exclusions & 0x1));
-		if ((exclusions & 0x1) && ps_brute_solve_lvl(list, sol, lvl, ac))
+		if ((exclusions & 0x1) && ps_brute_solve_lvl(datas, lvl, ac))
 			return (true);
 		ac++;
 		exclusions >>= 1;
@@ -83,31 +93,50 @@ static t_bool		next_lvl(t_pslist *list, t_list *sol[1], char lvl, t_action pac)
 	return (false);
 }
 
-
-t_bool				ps_brute_solve_lvl(t_pslist *list, t_list *sol[1], char lvl, t_action ac)
+t_bool				ps_brute_solve_lvl(t_brute *datas, char lvl, t_action ac)
 {
-	// qprintf("\n==================>entering solve_lvl\n");
-	// qprintf("lvl = %hhd  ac = %s \n", lvl, action_name(ac));
-	apply_actions(list, ac);
-	// print_list(list);
-	if (lvl == MAX_BRUTE_LVL)
+	apply_actions(datas->list, ac);
+	if (lvl == datas->maxl)
 	{
-		if (is_solved(list) == true)
-			return (save_step(sol, &ac));
-		// qprintf("1leaving solve_lvl<================\n");
-		rev_actions(list, ac);
+/* 		qprintf("==>\n"); */
+/* 		print_list(datas->list); */
+/* 		qprintf("<==\n"); */
+		if (is_solved(datas->list) == true)
+			return (save_step(datas->sol, &ac));
+		rev_actions(datas->list, ac);
 		return (false);
 	}
-	else if (next_lvl(list, sol, lvl + 1, ac) == true)
-		return (save_step(sol, &ac));
-	// qprintf("2leaving solve_lvl<================\n");
-	rev_actions(list, ac);
+	else if (next_lvl(datas, lvl + 1, ac) == true)
+		return (save_step(datas->sol, &ac));
+	rev_actions(datas->list, ac);
 	return (false);
 }
-	
-int					ps_brute_solve(t_pslist orig, t_list *solution[1])
+#define MAX_BRUTE_LVL 11
+
+int					ps_brute_solve(t_pslist *orig, t_list *solution[1])
 {
-	ps_brute_solve_lvl(&orig, solution, 0, none);
-	print_list(&orig);
+	t_brute		datas;
+	int			i;
+
+	i = 0;
+	while (++i <= MAX_BRUTE_LVL)
+	{
+		ft_bzero(&datas, sizeof(t_brute));
+		datas.list = (t_pslist*)ft_memdup(orig, sizeof(t_pslist));
+		datas.maxl = i;
+		qprintf("Calling for %d:\n", i);
+		if (ps_brute_solve_lvl(&datas, 0, none) == true)
+		{
+			i = MAX_BRUTE_LVL;
+			qprintf("true.\n");
+		}
+		else
+		{
+			qprintf("false.\n");
+		}
+		print_list(datas.list);
+		free(datas.list);
+	}
+	*solution = *datas.sol;
 	return (1);
 }
