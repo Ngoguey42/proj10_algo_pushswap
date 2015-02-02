@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:44:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/02 12:04:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/02 12:13:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,12 @@ int					ps_brute_solve(t_pslist *orig, t_list *solution[1])
 	int			i;
 
 	i = 0;
-	while (++i <= MAX_BRUTE_LVL)
+	while (i <= MAX_BRUTE_LVL)
 	{
 		ft_bzero(&datas, sizeof(t_brute));
 		datas.list = (t_pslist*)ft_memdup(orig, sizeof(t_pslist));
 		datas.maxl = i;
-		qprintf("Calling for %d:\n", i);
+		qprintf("\nCalling for %d:\n", i);
 		if (ps_brute_solve_lvl(&datas, 0, none) == true)
 		{
 			i = MAX_BRUTE_LVL;
@@ -136,6 +136,7 @@ int					ps_brute_solve(t_pslist *orig, t_list *solution[1])
 		}
 		print_list(datas.list);
 		free(datas.list);
+		i++;
 	}
 	*solution = *datas.sol;
 	return (1);

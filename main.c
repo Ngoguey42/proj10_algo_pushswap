@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/02 12:05:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/02 12:23:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static const t_pslist	*create_solved_ref(PS_TYPE len)
 	ret.bsz = 0;
 	i = 0;
 	while (i++ < len)
-		ret.a[i - 1] = i;
+		ret.a[i - 1] = len + 1 - i;
 	retp = (t_pslist*)ft_memdup(&ret, sizeof(t_pslist));
 	print_list(retp);
 	return ((const t_pslist*)retp);
@@ -34,7 +34,9 @@ static const t_pslist	*create_solved_ref(PS_TYPE len)
 
 int			main(void)
 {
-	PS_TYPE		origin[] = {4, 2, 3, 1};
+	PS_TYPE		origin[] = {6, 4, 5, 3, 8, 2, 7, 1};
+/* 	PS_TYPE		origin[] = {2, 1, 3, 5, 4, 6}; */
+/* 	PS_TYPE		origin[] = {1, 2, 3, 4}; */
 /* 	PS_TYPE		origin[] = {7, 2, 3, 6, 1, 4, 5}; */
 	PS_TYPE		len;
 	t_pslist	*origin_a;
