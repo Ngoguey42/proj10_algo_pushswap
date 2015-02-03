@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:52:13 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 10:36:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 11:39:43 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ void		apply_action(t_psl *l, t_action act)
 		apply_actions_s(l, act);
 	if (l->act.zone_size == l->act.buf_size)
 		ft_dstor_realloc(&l->act, l->act.buf_size + 0x20);
+	if (l->act.zone_size == 0)
+		l->act.zone_front = l->act.buf_rear;
+	*l->act.zone_front = (DSTOR_T)act;
 	l->act.zone_size++;
 	l->act.zone_front++;
-	*l->act.zone_front = (DSTOR_T)act;
+	return ;
 }
 
 void		rev_action(t_psl *l)

@@ -6,21 +6,16 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:47 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 11:16:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 11:36:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ps.h>
 
-void		ps_print_dstor(const t_dstor *dstor)
+static void	print_dstor_content(const t_dstor *dstor)
 {
 	int	i;
 
-	ft_dprintf(2, "Dynamic storage:\n");
-	ft_dprintf(2, "buff :  rear{%p} size(%u)\n",
-		dstor->buf_rear, dstor->buf_size);
-	ft_dprintf(2, "zone : front{%p} size(%u)\n",
-		dstor->zone_front, dstor->zone_size);
 	i = 0;
 	while (i < (int)dstor->buf_size)
 	{
@@ -36,20 +31,21 @@ void		ps_print_dstor(const t_dstor *dstor)
 	return ;
 }
 
-void		ps_print_dbuff(const t_dbuff *dbuff)
+void		ps_print_dstor(const t_dstor *dstor)
+{
+	ft_dprintf(2, "Dynamic storage:\n");
+	ft_dprintf(2, "buff :  rear{%p} size(%u)\n",
+		dstor->buf_rear, dstor->buf_size);
+	ft_dprintf(2, "zone : front{%p} size(%u)\n",
+		dstor->zone_front, dstor->zone_size);
+	print_dstor_content(dstor);
+	return ;
+}
+
+static void	print_dbuff_content(const t_dbuff *dbuff)
 {
 	int	i;
 
-	ft_dprintf(2, "Dynamic buffer:\n");
-	ft_dprintf(2, "buff : rear{%16p} front{%16p} size(%u)\n",
-		dbuff->buf_rear, dbuff->buf_front, dbuff->buf_size);
-	ft_dprintf(2, "zone : rear{%16p} front{%16p} size(%u)\n",
-		dbuff->zone_rear, dbuff->zone_front, dbuff->zone_size);
-	if (dbuff->zone_size != 0)
-		ft_dprintf(2, "delta: rear{%16u} front{%16u} size(%u)\n",
-			dbuff->zone_rear - dbuff->buf_rear,
-			dbuff->buf_front - dbuff->zone_front,
-			dbuff->buf_size - dbuff->zone_size);
 	i = 0;
 	ft_dprintf(2, ":yel:");
 	while (i < (int)dbuff->buf_size)
@@ -62,6 +58,36 @@ void		ps_print_dbuff(const t_dbuff *dbuff)
 		i++;
 	}
 	ft_dprintf(2, ":eof:\n");
+
+	return ;
+}
+
+void		ps_print_dbuff(const t_dbuff *dbuff)
+{
+	ft_dprintf(2, "Dynamic buffer:\n");
+	ft_dprintf(2, "buff : rear{%16p} front{%16p} size(%u)\n",
+		dbuff->buf_rear, dbuff->buf_front, dbuff->buf_size);
+	ft_dprintf(2, "zone : rear{%16p} front{%16p} size(%u)\n",
+		dbuff->zone_rear, dbuff->zone_front, dbuff->zone_size);
+	if (dbuff->zone_size != 0)
+		ft_dprintf(2, "delta: rear{%16u} front{%16u} size(%u)\n",
+			dbuff->zone_rear - dbuff->buf_rear,
+			dbuff->buf_front - dbuff->zone_front,
+			dbuff->buf_size - dbuff->zone_size);
+	print_dbuff_content(dbuff);
+	return ;
+}
+
+void		ps_print_psl(const t_psl *psl)
+{
+	ft_dprintf(2, "Push Swap List:\nAl: ");
+	print_dbuff_content(&psl->al);
+	ft_dprintf(2, "Bl: ");
+	print_dbuff_content(&psl->bl);
+	ft_dprintf(2, "Ac: ");
+	print_dstor_content(&psl->act);
+	ft_dprintf(2, "\n");
+	
 	return ;
 }
 

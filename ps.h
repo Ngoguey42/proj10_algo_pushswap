@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 11:05:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 11:31:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ const char		*ps_action_name(t_action action);
 /* void			ps_print_sol(const t_list *solutions); */
 void        ps_print_dstor(const t_dstor *dstor);
 void        ps_print_dbuff(const t_dbuff *dbuff);
+void		ps_print_psl(const t_psl *psl);
 
 #endif

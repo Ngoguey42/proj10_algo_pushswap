@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 07:55:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 10:45:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 11:26:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ int			ft_dbuff_recenter(t_dbuff *dbuff)
 	size_t	rear_pad;
 
 	rear_pad = (dbuff->buf_size - dbuff->zone_size) / 2 - DBUFF_FRONT_AFFINITY;
-	ft_memmove(dbuff->buf_rear + rear_pad, dbuff->zone_rear, dbuff->zone_size);
-	ft_bzero(dbuff->buf_rear, rear_pad);
+	ft_memmove(dbuff->buf_rear + rear_pad, dbuff->zone_rear,
+		dbuff->zone_size * sizeof(DBUFF_T));
+	ft_bzero(dbuff->buf_rear, rear_pad * sizeof(DBUFF_T));
 	dbuff->zone_rear = dbuff->buf_rear + rear_pad;
 	dbuff->zone_front = dbuff->zone_rear + dbuff->zone_size;
 	ft_bzero(dbuff->zone_front + 1, dbuff->buf_front - dbuff->zone_front);
