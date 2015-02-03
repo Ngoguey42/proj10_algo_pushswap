@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 12:16:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 14:00:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int			main(void)
 
 	t_psl	psl;
 
-	ft_dbuff_init(&psl.al, len * 3);
-	ft_dbuff_init(&psl.bl, len * 3);
+	ft_dbuff_init(&psl.al, len + 15, 5);
+	ft_dbuff_init(&psl.bl, len + 15, 5);
 	ft_dstor_init(&psl.act, 0x20);
 
 /* 	ps_print_dstor(&psl.act); */
@@ -48,6 +48,7 @@ int			main(void)
 	fill_al(&psl.al, list, len);
 
 
+/* 	ps_print_dbuff(&psl.al); */
 /* 	ps_print_dbuff(&psl.al); */
 /* 	return (0); */
 
@@ -59,13 +60,145 @@ int			main(void)
 /* 	apply_action(&psl, sa); */
 /* 	ps_print_psl(&psl); */
 
+
+/* 	ps_print_dbuff(&psl.al); */
+/* 	ps_print_dbuff(&psl.bl); */
+
 	apply_action(&psl, pb);
 	ps_print_psl(&psl);
 
-
-
-	rev_action(&psl);
+	apply_action(&psl, pb);
 	ps_print_psl(&psl);
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+	apply_action(&psl, rrr);
+	ps_print_psl(&psl);
+
+
+
+
+
+/* 	rev_action(&psl); */
+/* 	ps_print_psl(&psl); */
 
 
 	return (0);

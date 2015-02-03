@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 20:39:33 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 07:53:57 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 13:37:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct					s_dbuff
 	size_t						zone_size;
 	DBUFF_T						*zone_rear;
 	DBUFF_T						*zone_front;
+	DBUFF_T						*zone_start;
 }								t_dbuff;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 11:31:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 13:55:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@
 # define SS 0b10000000000
 
 #define PS_TYPE unsigned short
+
+# define BZF (l->bl.zone_front)
+# define BZR (l->bl.zone_rear)
+# define BZS (l->bl.zone_size)
+
+# define AZF (l->al.zone_front)
+# define AZR (l->al.zone_rear)
+# define AZS (l->al.zone_size)
 
 typedef struct	s_pslist
 {
