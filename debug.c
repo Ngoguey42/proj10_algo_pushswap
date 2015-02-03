@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:47 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 11:36:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 12:02:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	print_dbuff_content(const t_dbuff *dbuff)
 	{
 		if (i == (int)(dbuff->zone_rear - dbuff->buf_rear))
 			ft_dprintf(2, ":eoc:");
-		if (i == (int)(dbuff->zone_front - dbuff->buf_rear))
+		if (i == (int)(dbuff->zone_front - dbuff->buf_rear + 1))
 			ft_dprintf(2, ":yel:");
 		ft_dprintf(2, "%hu", dbuff->buf_rear[i]);
 		i++;
