@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 14:00:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 14:44:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,180 +26,61 @@ void		fill_al(t_dbuff *al, PS_TYPE *list, size_t len)
 	return ;
 }
 
+void		create_ref(t_psl *ref, size_t len)
+{
+	DBUFF_T	i;
+
+	ft_dbuff_init(&ref->al, len, 0);
+	i = 0;
+	while (i < len)
+	{
+		ref->al.buf_rear[i] = len - i;
+		i++;
+	}
+	ref->al.zone_rear = ref->al.buf_rear;
+	ref->al.zone_size = len;
+	ps_print_dbuff(&ref->al);
+	ps_is_solved(ref);
+	return ;
+}
+
+
 int			main(void)
 {
 	PS_TYPE	list[] = {
 /* 		7, 2, 4, 3, 5, 6, 1 */
-		1, 2, 3, 4, 5, 6, 7
+		1, 2, 3, 4, 5, 6
+
 	};
 	size_t	len = sizeof(list) / sizeof(PS_TYPE);
-
-
+	t_psl	ref;
 	t_psl	psl;
 
-	ft_dbuff_init(&psl.al, len + 15, 5);
-	ft_dbuff_init(&psl.bl, len + 15, 5);
+	ft_dbuff_init(&psl.al, len + 25, 10);
+	ft_dbuff_init(&psl.bl, len + 25, 10);
 	ft_dstor_init(&psl.act, 0x20);
 
+	create_ref(&ref, len);
 /* 	ps_print_dstor(&psl.act); */
 
 
 	ps_print_psl(&psl);
 	fill_al(&psl.al, list, len);
-
-
-/* 	ps_print_dbuff(&psl.al); */
-/* 	ps_print_dbuff(&psl.al); */
-/* 	return (0); */
-
 	ps_print_psl(&psl);
 	ft_dbuff_recenter(&psl.al);
 	ps_print_psl(&psl);
-/* 	ps_print_dbuff(&psl.al); */
-	
-/* 	apply_action(&psl, sa); */
-/* 	ps_print_psl(&psl); */
 
 
-/* 	ps_print_dbuff(&psl.al); */
-/* 	ps_print_dbuff(&psl.bl); */
+#define TEST(action)							\
+	apply_action(&psl, action);					\
+	ps_print_psl(&psl);							\
+	if (ps_is_solved(&psl))						\
+		qprintf("solved\n\n");					\
+	else										\
+		qprintf("not solved\n\n")
 
-	apply_action(&psl, pb);
+	ps_brute_solve(&psl);
 	ps_print_psl(&psl);
-
-	apply_action(&psl, pb);
-	ps_print_psl(&psl);
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-	apply_action(&psl, rrr);
-	ps_print_psl(&psl);
-
-
-
-
-
-/* 	rev_action(&psl); */
-/* 	ps_print_psl(&psl); */
-
 
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:44:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/02 14:47:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 14:42:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,68 +74,66 @@ static void			fill_exclusions(PS_TYPE asz, PS_TYPE bsz, t_action pac,
 	return ;
 }
 
-static t_bool		next_lvl(t_brute *datas, char lvl, t_action pac)
+static t_bool		next_lvl(t_psl *l, t_action pact, char lvl, char maxl)
 {
-	t_action		ac;
+	t_action		act;
 	unsigned short	exclusions;
 
 	exclusions = -1;
-	fill_exclusions(datas->list->asz, datas->list->bsz, pac, &exclusions);
-	ac = 0;
-	while (ac <= ss)
+	fill_exclusions(AZS, BZS, pact, &exclusions);
+	act = 0;
+	while (act <= ss)
 	{
 		// qprintf("while: %3s auth(%hd)\n", action_name(ac), (exclusions & 0x1));
-		if ((exclusions & 0x1) && ps_brute_solve_lvl(datas, lvl, ac))
+		if ((exclusions & 0x1) && ps_brute_solve_lvl(l, act, lvl, maxl))
 			return (true);
-		ac++;
+		act++;
 		exclusions >>= 1;
 	}
 	return (false);
 }
 
-inline t_bool				ps_brute_solve_lvl(t_brute *datas, char lvl, t_action ac)
+t_bool				ps_brute_solve_lvl(t_psl *l, t_action act, char lvl, char maxl)
 {
-	apply_actions(datas->list, ac);
-	if (lvl == datas->maxl)
+	if (act != none)
+		apply_action(l, act);
+	if (lvl == maxl)
 	{
-		if (is_solved(datas->list) == true)
-			return (save_step(datas->sol, &ac));
-		rev_actions(datas->list, ac);
+		if (ps_is_solved(l))
+		{
+/* 			ps_print_psl(l); */
+			return (true);
+		}
+		if (act != none)
+			rev_action(l);
 		return (false);
 	}
-	else if (next_lvl(datas, lvl + 1, ac) == true)
-		return (save_step(datas->sol, &ac));
-	rev_actions(datas->list, ac);
+	else if (next_lvl(l, act, lvl + 1, maxl))
+		return (true);
+	if (act != none)
+		rev_action(l);
 	return (false);
 }
 #define MAX_BRUTE_LVL 10
 
-int					ps_brute_solve(t_pslist *orig, t_list *solution[1])
+int					ps_brute_solve(t_psl *l)
 {
-	t_brute		datas;
 	int			i;
 
 	i = 0;
 	while (i <= MAX_BRUTE_LVL)
 	{
-		ft_bzero(&datas, sizeof(t_brute));
-		datas.list = (t_pslist*)ft_memdup(orig, sizeof(t_pslist));
-		datas.maxl = i;
 		qprintf("\nCalling for %d:\n", i);
-		if (ps_brute_solve_lvl(&datas, 0, none) == true)
+		if (ps_brute_solve_lvl(l, none, 0, i) == true)
 		{
-			i = MAX_BRUTE_LVL;
 /* 			qprintf("true.\n"); */
+			break ;
 		}
 		else
 		{
-			
 /* 			qprintf("false.\n"); */
 		}
-/* 		print_list(datas.list); */
-		free(datas.list);
 		i++;
 	}
-	*solution = *datas.sol;
 	return (1);
 }
