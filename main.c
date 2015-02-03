@@ -6,123 +6,45 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/02 14:46:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 11:13:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ps.h>
 #include <stdlib.h>
 
-
-static const t_pslist	*create_solved_ref(PS_TYPE len)
+void		fill_al(t_dbuff *al, PS_TYPE *list, size_t len)
 {
-	t_pslist	ret;
-	t_pslist	*retp;
-	PS_TYPE		i;
+	DBUFF_T	*ptr;
 
-	ret.asz = len;
-	ret.a = (PS_TYPE*)malloc(len * sizeof(PS_TYPE));
-	ret.b = NULL;
-	ret.bsz = 0;
-	i = 0;
-	while (i++ < len)
-		ret.a[i - 1] = len + 1 - i;
-	retp = (t_pslist*)ft_memdup(&ret, sizeof(t_pslist));
-	print_list(retp);
-	return ((const t_pslist*)retp);
+	al->zone_size = len;
+	al->zone_rear = al->buf_rear;
+	al->zone_front = al->buf_rear + len;
+	ptr = al->zone_rear;
+	while (len--)
+		*ptr++ = *list++;
+	return ;
 }
 
 int			main(void)
 {
-	PS_TYPE		origin[] = {6, 4, 8, 3, 1, 2, 7, 5, 9, 
-6, 4, 8, 3, 1, 2, 7, 5, 9, 
-6, 4, 8, 3, 1, 2, 7, 5, 9, 
-6, 4, 8, 3, 1, 2, 7, 5, 9, 
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9,
-							6, 4, 8, 3, 1, 2, 7, 5, 9
+	PS_TYPE	list[] = {
+		1, 2, 4, 3, 5, 6, 7
+		
+	};
+	size_t	len = sizeof(list) / sizeof(PS_TYPE);
 
 
+	t_psl	psl;
 
-
-
-};
-/* 	PS_TYPE		origin[] = {2, 1, 3, 5, 4, 6}; */
-/* 	PS_TYPE		origin[] = {1, 2, 3, 4}; */
-/* 	PS_TYPE		origin[] = {7, 2, 3, 6, 1, 4, 5}; */
-	PS_TYPE		len;
-	t_pslist	*origin_a;
-	t_list		*sol[1];
-
-	len = sizeof(origin) / sizeof(PS_TYPE);
-	(void)is_solved(create_solved_ref(len));
-	origin_a = (t_pslist*)ft_memalloc(sizeof(t_pslist));
-	origin_a->a = (PS_TYPE*)ft_memdup(origin, len * sizeof(PS_TYPE));
-	origin_a->b = (PS_TYPE*)ft_memalloc(len * sizeof(PS_TYPE));
-	origin_a->asz = len;
-		print_list(origin_a);
-
-	int		i = 0;
-	int		max = 3;
-	while (i++ < max)
-	{
-	*sol = NULL;
-	(void)ps_brute_solve(origin_a, sol);
-/* 	break; */
-	}
-	ps_print_sol(*sol);
+	ft_dbuff_init(&psl.al, len * 3);
+	ft_dbuff_init(&psl.bl, len * 3);
+	ft_dstor_init(&psl.act, 0x20);
+	ps_print_dstor(&psl.act);
+	ps_print_dbuff(&psl.al);
+	fill_al(&psl.al, list, len);
+	ps_print_dbuff(&psl.al);
+	ft_dbuff_recenter(&psl.al);
+	ps_print_dbuff(&psl.al);
 	return (0);
 }

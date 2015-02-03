@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/02 13:15:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/03 11:05:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,32 @@ typedef struct	s_brute
 	PS_TYPE		maxl;
 }				t_brute;
 
+typedef struct	s_psl
+{
+	t_dstor		act;
+	t_dbuff		al;
+	t_dbuff		bl;
+}				t_psl;
+
 /*
 ** Tools
 */
-t_bool			save_step(t_list *sol[1], const t_action *ac);
-t_bool			is_solved(const t_pslist *list);
+/* t_bool			save_step(t_list *sol[1], const t_action *ac); */
+t_bool			is_solved(const t_psl *l);
+/* t_bool			is_solved(const t_pslist *list); */
 
 /*
 ** Apply action to list
 */
-void			rev_actions(t_pslist *list, t_action ac);
-void			apply_actions(t_pslist *list, t_action ac);
+void			rev_action(t_psl *l);
+void			apply_action(t_psl *l, t_action act);
+/* void			rev_actions(t_pslist *list, t_action ac); */
+/* void			apply_actions(t_pslist *list, t_action ac); */
 
-void			apply_actions_s(t_pslist *list, t_action ac);
-void			apply_actions_p(t_pslist *list, t_action ac);
-void			apply_actions_rr(t_pslist *list, t_action ac);
-void			apply_actions_r(t_pslist *list, t_action ac);
+void			apply_actions_s(t_psl *l, t_action act);
+void			apply_actions_p(t_psl *l, t_action act);
+void			apply_actions_rr(t_psl *l, t_action act);
+void			apply_actions_r(t_psl *l, t_action act);
 
 /*
 ** Brute solve
@@ -90,9 +100,10 @@ t_bool			ps_brute_solve_lvl(t_brute *datas, char lvl, t_action ac);
 /*
 ** Debug
 */
-const char		*action_name(t_action action);
-void			print_list(const t_pslist *list);
-void			ps_print_sol(const t_list *solutions);
-
+const char		*ps_action_name(t_action action);
+/* void			print_list(const t_pslist *list); */
+/* void			ps_print_sol(const t_list *solutions); */
+void        ps_print_dstor(const t_dstor *dstor);
+void        ps_print_dbuff(const t_dbuff *dbuff);
 
 #endif
