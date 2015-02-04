@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:44:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 11:36:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/04 12:10:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 #define B_IS_3_PREV_R		(-1 - RB - RR)
 #define B_IS_3_PREV_RR		(-1 - RRB - RRR)
 
-#define MAX_BRUTE_LVL 12
+#define MAX_BRUTE_LVL 13
 
 static void		a_limit_exclusions(DBUFF_T asz, t_action pact,
 					t_dbyte *exclusions)
@@ -132,7 +132,7 @@ inline t_bool	ps_brute_solve_lvl(t_psl *l, t_action act, t_byte lvl,
 	return (false);
 }
 
-int				ps_brute_solve(t_psl *l)
+t_bool			ps_brute_solve(t_psl *l)
 {
 	int			i;
 
@@ -140,8 +140,8 @@ int				ps_brute_solve(t_psl *l)
 	while (i <= MAX_BRUTE_LVL)
 	{
 		if (ps_brute_solve_lvl(l, none, 0, i) == true)
-			break ;
+			return (true);
 		i++;
 	}
-	return (1);
+	return (false);
 }

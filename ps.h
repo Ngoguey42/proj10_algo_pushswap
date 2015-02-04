@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 10:18:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/04 12:32:43 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define SB 0b01000000000
 # define SS 0b10000000000
 
-#define PS_TYPE unsigned short
+#define PS_TYPE DBUFF_T
 
 # define BZF (l->bl.zone_front)
 # define BZR (l->bl.zone_rear)
@@ -37,14 +37,6 @@
 # define AZF (l->al.zone_front)
 # define AZR (l->al.zone_rear)
 # define AZS (l->al.zone_size)
-
-typedef struct	s_pslist
-{
-	PS_TYPE		*a;
-	PS_TYPE		asz;
-	PS_TYPE		*b;
-	PS_TYPE		bsz;
-}				t_pslist;
 
 typedef enum	e_action
 {
@@ -62,12 +54,13 @@ typedef enum	e_action
 	none
 }				t_action;
 
-typedef struct	s_brute
+typedef struct	s_set
 {
-	t_pslist	*list;
-	t_list		*sol[1];
-	PS_TYPE		maxl;
-}				t_brute;
+	PS_TYPE		first;
+	PS_TYPE		ptr;
+	PS_TYPE		len;
+	PS_TYPE		last;
+}				t_set;
 
 typedef struct	s_psl
 {
@@ -101,11 +94,14 @@ void			apply_actions_r(t_psl *l, t_action act);
 */
 /* t_bool			ps_brute_solve_lvl(t_pslist *list, t_list *sol[1], */
 /* 					char lvl, t_action ac); */
-int				ps_brute_solve(t_psl *l);
+t_bool			ps_brute_solve(t_psl *l);
 t_bool			ps_brute_solve_lvl(t_psl *l, t_action act, t_byte lvl, t_byte maxl);
 
 /* int				ps_brute_solve(t_pslist *orig, t_list *solution[1]); */
 /* t_bool			ps_brute_solve_lvl(t_brute *datas, char lvl, t_action ac); */
+
+void            ps_set_solve(t_psl *l);
+void            ps_build_sets(const t_psl *l, t_list *lst[1]);
 
 
 /*
@@ -117,5 +113,7 @@ const char		*ps_action_name(t_action action);
 void        ps_print_dstor(const t_dstor *dstor);
 void        ps_print_dbuff(const t_dbuff *dbuff);
 void		ps_print_psl(const t_psl *psl);
+
+
 
 #endif

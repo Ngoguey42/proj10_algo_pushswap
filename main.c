@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 11:25:09 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/04 12:14:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			main(void)
 {
 //		2, 4, 3, 5, 7,  6, 1, 8
 	PS_TYPE	list[] = {
-		2, 4, 3, 5, 7,  6, 1
+		2, 4, 3, 5, 7, 8,  6, 1
 
 
 
@@ -59,9 +59,6 @@ int			main(void)
 /* 		1, 2, 3, 4, 5, 1 */
 
 	};
-
-
-
 	size_t	len = sizeof(list) / sizeof(PS_TYPE);
 	t_psl	ref;
 	t_psl	psl;
@@ -69,17 +66,9 @@ int			main(void)
 	ft_dbuff_init(&psl.al, len + 25, 10);
 	ft_dbuff_init(&psl.bl, len + 25, 10);
 	ft_dstor_init(&psl.act, 0x20);
-
 	create_ref(&ref, len);
-/* 	ps_print_dstor(&psl.act); */
-
-
-	ps_print_psl(&psl);
 	fill_al(&psl.al, list, len);
-	ps_print_psl(&psl);
 	ft_dbuff_recenter(&psl.al);
-	ps_print_psl(&psl);
-
 
 #define TEST(action)							\
 	apply_action(&psl, action);					\
@@ -89,13 +78,8 @@ int			main(void)
 	else										\
 		qprintf("not solved\n\n")
 
-/* 	int i; */
-/* 	for (i = 0; i < 3; i++) */
-	ps_brute_solve(&psl);
-/* 	ps_print_psl(&psl); */
-
+/* 	ps_brute_solve(&psl); */
 	TEST(none);
 
-/* 	(void)i; */
 	return (0);
 }
