@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 12:32:43 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/04 13:16:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef enum	e_action
 typedef struct	s_set
 {
 	PS_TYPE		first;
-	PS_TYPE		ptr;
+	PS_TYPE		*ptr;
 	PS_TYPE		len;
 	PS_TYPE		last;
 }				t_set;
