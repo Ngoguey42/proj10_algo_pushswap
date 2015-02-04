@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:44:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 08:15:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/04 09:10:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,16 @@
 #define S_EX	(-1 - SA - SB - SS)
 
 #define A_IS_0_1	(-1 - SS - SA - PB - RRR - RR - RA - RRA)
-#define A_IS_2		(-1 - RRA - RA)
+#define A_IS_2				(-1 - RRA - RA)
+#define A_IS_2_PREV_SWAP	(-1 - RRA - RA - RRR - RR - SA  - SS)
+#define A_IS_3_PREV_R				(-1 - RA - RR)
+#define A_IS_3_PREV_RR				(-1 - RRA - RRR)
 #define B_IS_0		(-1 - SS - SB - PA - RRR - RR - RB - RRB)
 #define B_IS_1		(-1 - SS - SB      - RRR - RR - RB - RRB)
-#define B_IS_2		(-1 - RRB - RB)
+#define B_IS_2				(-1 - RRB - RB)
+#define B_IS_2_PREV_SWAP	(-1 - RRB - RB - RRR - RR - SB - SS)
+#define B_IS_3_PREV_R				(-1 - RB - RR)
+#define B_IS_3_PREV_RR				(-1 - RRB - RRR)
 
 // ra,		0
 // rb,		1
@@ -41,10 +47,6 @@
 // sb,		9
 // ss,		10
 // none		11
-	
-/*
-** if size <= 2 don"t allow rr rotations
-*/
 
 static void			fill_exclusions(PS_TYPE asz, PS_TYPE bsz, t_action pac,
 						unsigned short *exclusions)
@@ -56,14 +58,38 @@ static void			fill_exclusions(PS_TYPE asz, PS_TYPE bsz, t_action pac,
 	*exclusions = exc1[pac];
 	if (asz <= 1)
 		*exclusions &= A_IS_0_1;
-	else if (bsz == 2)
-		*exclusions &= A_IS_2;
+	else if (asz == 2)
+	{
+		if (pac == rr || pac == rrr || pac == ss || pac == sa)
+			*exclusions &= A_IS_2_PREV_SWAP;
+		else
+			*exclusions &= A_IS_2;
+	}
+	else if (asz == 3)
+	{
+		if (pac == ra || pac == rr)
+			*exclusions &= A_IS_3_PREV_R;
+		else if (pac == rra || pac == rrr)
+			*exclusions &= A_IS_3_PREV_RR;
+	}
 	if (bsz == 1)
 		*exclusions &= B_IS_1;
 	else if (bsz == 0)
 		*exclusions &= B_IS_0;
 	else if (bsz == 2)
-		*exclusions &= B_IS_2;
+	{
+		if (pac == rr || pac == rrr || pac == ss || pac == sb)
+			*exclusions &= B_IS_2_PREV_SWAP;
+		else
+			*exclusions &= B_IS_2;
+	}
+	else if (bsz == 3)
+	{
+		if (pac == rb || pac == rr)
+			*exclusions &= B_IS_3_PREV_R;
+		else if (pac == rrb || pac == rrr)
+			*exclusions &= B_IS_3_PREV_RR;
+	}
 	return ;
 }
 
