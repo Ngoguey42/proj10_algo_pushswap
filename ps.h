@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 14:28:52 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/04 10:18:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void			apply_actions_r(t_psl *l, t_action act);
 /* t_bool			ps_brute_solve_lvl(t_pslist *list, t_list *sol[1], */
 /* 					char lvl, t_action ac); */
 int				ps_brute_solve(t_psl *l);
-t_bool			ps_brute_solve_lvl(t_psl *l, t_action act, char lvl, char maxl);
+t_bool			ps_brute_solve_lvl(t_psl *l, t_action act, t_byte lvl, t_byte maxl);
 
 /* int				ps_brute_solve(t_pslist *orig, t_list *solution[1]); */
 /* t_bool			ps_brute_solve_lvl(t_brute *datas, char lvl, t_action ac); */

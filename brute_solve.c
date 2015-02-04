@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:44:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 09:24:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/04 10:27:09 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,20 @@
 #define S_EX	(-1 - SA - SB - SS)
 
 #define A_IS_0_1	(-1 - SS - SA - PB - RRR - RR - RA - RRA)
-#define A_IS_2				(-1 - RRA - RA)
-#define A_IS_2_PREV_SWAP	(-1 - RRA - RA - RRR - RR - SA  - SS)
-#define A_IS_3_PREV_R				(-1 - RA - RR)
-#define A_IS_3_PREV_RR				(-1 - RRA - RRR)
 #define B_IS_0		(-1 - SS - SB - PA - RRR - RR - RB - RRB)
 #define B_IS_1		(-1 - SS - SB      - RRR - RR - RB - RRB)
+
+#define A_IS_2				(-1 - RRA - RA)
 #define B_IS_2				(-1 - RRB - RB)
+#define A_IS_2_PREV_SWAP	(-1 - RRA - RA - RRR - RR - SA - SS)
 #define B_IS_2_PREV_SWAP	(-1 - RRB - RB - RRR - RR - SB - SS)
-#define B_IS_3_PREV_R				(-1 - RB - RR)
-#define B_IS_3_PREV_RR				(-1 - RRB - RRR)
+
+#define A_IS_3_PREV_R		(-1 - RA - RR)
+#define A_IS_3_PREV_RR		(-1 - RRA - RRR)
+#define B_IS_3_PREV_R		(-1 - RB - RR)
+#define B_IS_3_PREV_RR		(-1 - RRB - RRR)
+
+#define MAX_BRUTE_LVL 14
 
 // ra,		0
 // rb,		1
@@ -46,62 +50,65 @@
 // sa,		8
 // sb,		9
 // ss,		10
-
-
 // none		11
 
-static void			fill_exclusions(PS_TYPE asz, PS_TYPE bsz, t_action pac,
-						unsigned short *exclusions)
+static void			fill_exclusions(const t_psl *l, t_action pac,
+						unsigned short *exclusions, t_byte lvl_left)
 {
 	const unsigned short	exc1[] = {RA_EX, RB_EX, RR_EX, RRA_EX, RRB_EX,
 
 		RRR_EX, PA_EX, PB_EX, S_EX, S_EX, S_EX, -1};
 
 	*exclusions = exc1[pac];
-	if (asz <= 1)
+	if (AZS <= 1)
 		*exclusions &= A_IS_0_1;
-	else if (asz == 2)
+	else if (AZS == 2)
 	{
 		if (pac == rr || pac == rrr || pac == ss || pac == sa)
 			*exclusions &= A_IS_2_PREV_SWAP;
 		else
 			*exclusions &= A_IS_2;
 	}
-	else if (asz == 3)
+	else if (AZS == 3)
 	{
 		if (pac == ra || pac == rr)
 			*exclusions &= A_IS_3_PREV_R;
 		else if (pac == rra || pac == rrr)
 			*exclusions &= A_IS_3_PREV_RR;
 	}
-	if (bsz == 1)
+	if (BZS == 1)
 		*exclusions &= B_IS_1;
-	else if (bsz == 0)
+	else if (BZS == 0)
 		*exclusions &= B_IS_0;
-	else if (bsz == 2)
+	else if (BZS == 2)
 	{
 		if (pac == rr || pac == rrr || pac == ss || pac == sb)
 			*exclusions &= B_IS_2_PREV_SWAP;
 		else
 			*exclusions &= B_IS_2;
 	}
-	else if (bsz == 3)
+	else if (BZS == 3)
 	{
 		if (pac == rb || pac == rr)
 			*exclusions &= B_IS_3_PREV_R;
 		else if (pac == rrb || pac == rrr)
 			*exclusions &= B_IS_3_PREV_RR;
 	}
+	(void)lvl_left;
+	if (BZS == (size_t)lvl_left)
+		*exclusions = PA;
+	else if (BZS > (size_t)lvl_left)
+		*exclusions = 0;
 	return ;
 }
 
-static t_bool		next_lvl(t_psl *l, t_action pact, char lvl, char maxl)
+static t_bool		next_lvl(t_psl *l, t_action pact, t_byte lvl, t_byte maxl)
 {
 	t_action		act;
 	unsigned short	exclusions;
 
 /* 	exclusions = -1; */
-	fill_exclusions(AZS, BZS, pact, &exclusions);
+	fill_exclusions(l, pact, &exclusions, maxl - lvl + 1);
 	act = 0;
 	while (act <= ss)
 	{
@@ -114,7 +121,7 @@ static t_bool		next_lvl(t_psl *l, t_action pact, char lvl, char maxl)
 	return (false);
 }
 
-inline t_bool				ps_brute_solve_lvl(t_psl *l, t_action act, char lvl, char maxl)
+inline t_bool				ps_brute_solve_lvl(t_psl *l, t_action act, t_byte lvl, t_byte maxl)
 {
 	if (act != none)
 		apply_action(l, act);
@@ -135,7 +142,6 @@ inline t_bool				ps_brute_solve_lvl(t_psl *l, t_action act, char lvl, char maxl)
 		rev_action(l);
 	return (false);
 }
-#define MAX_BRUTE_LVL 11
 
 int					ps_brute_solve(t_psl *l)
 {
@@ -144,7 +150,7 @@ int					ps_brute_solve(t_psl *l)
 	i = 0;
 	while (i <= MAX_BRUTE_LVL)
 	{
-/* 		qprintf("\nCalling for %d:\n", i); */
+		qprintf("\nCalling for %d:\n", i);
 		if (ps_brute_solve_lvl(l, none, 0, i) == true)
 		{
 /* 			qprintf("true.\n"); */
