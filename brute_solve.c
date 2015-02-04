@@ -6,18 +6,18 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:44:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 09:10:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/04 09:24:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ps.h>
 #include <stdlib.h>
 
-#define RA_EX	(-1 - RB - RRA - RRR)
-#define RB_EX	(-1 - RA - RRB - RRR)
+#define RA_EX	(-1 - RB - RRA - RRR		- SB - RRB)
+#define RB_EX	(-1 - RA - RRB - RRR		- SA - RRA)
 #define RR_EX	(-1 - RRA - RRB - RRR)
-#define RRA_EX	(-1 - RA - RRB - RR)
-#define RRB_EX	(-1 - RB - RRA - RR)
+#define RRA_EX	(-1 - RA - RRB - RR			- SB)
+#define RRB_EX	(-1 - RB - RRA - RR			- SA)
 #define RRR_EX	(-1 - RA - RB - RR)
 #define PA_EX	(-1 - PB)
 #define PB_EX	(-1 - PA)
@@ -46,6 +46,8 @@
 // sa,		8
 // sb,		9
 // ss,		10
+
+
 // none		11
 
 static void			fill_exclusions(PS_TYPE asz, PS_TYPE bsz, t_action pac,
