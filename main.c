@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 14:44:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/04 08:06:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int			main(void)
 {
 	PS_TYPE	list[] = {
 /* 		7, 2, 4, 3, 5, 6, 1 */
-		1, 2, 3, 4, 5, 6
+		1, 2, 3, 4, 5, 1,
+		1, 2, 3, 4, 5, 1,
+		1, 2, 3, 4, 5, 1,
+		1, 2, 3, 4, 5, 1
 
 	};
 	size_t	len = sizeof(list) / sizeof(PS_TYPE);
@@ -79,6 +82,8 @@ int			main(void)
 	else										\
 		qprintf("not solved\n\n")
 
+	int i;
+	for (i = 0; i < 3; i++)
 	ps_brute_solve(&psl);
 	ps_print_psl(&psl);
 

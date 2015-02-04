@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:44:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 08:15:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/02 14:47:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@
 #define S_EX	(-1 - SA - SB - SS)
 
 #define A_IS_0_1	(-1 - SS - SA - PB - RRR - RR - RA - RRA)
-#define A_IS_2		(-1 - RRA - RA)
 #define B_IS_0		(-1 - SS - SB - PA - RRR - RR - RB - RRB)
 #define B_IS_1		(-1 - SS - SB      - RRR - RR - RB - RRB)
-#define B_IS_2		(-1 - RRB - RB)
 
 // ra,		0
 // rb,		1
@@ -49,84 +47,95 @@
 static void			fill_exclusions(PS_TYPE asz, PS_TYPE bsz, t_action pac,
 						unsigned short *exclusions)
 {
-	const unsigned short	exc1[] = {RA_EX, RB_EX, RR_EX, RRA_EX, RRB_EX,
-
-		RRR_EX, PA_EX, PB_EX, S_EX, S_EX, S_EX, -1};
-
-	*exclusions = exc1[pac];
+	if (pac == ra)
+		*exclusions = RA_EX;
+	else if (pac == rb)
+		*exclusions = RB_EX;
+	else if (pac == rr)
+		*exclusions = RR_EX;
+	else if (pac == rra)
+		*exclusions = RRA_EX;
+	else if (pac == rrb)
+		*exclusions = RRB_EX;
+	else if (pac == rrr)
+		*exclusions = RRR_EX;
+	else if (pac == pa)
+		*exclusions = PA_EX;
+	else if (pac == pb)
+		*exclusions = PB_EX;
+	else if (pac != none)
+		*exclusions = S_EX;
 	if (asz <= 1)
 		*exclusions &= A_IS_0_1;
-	else if (bsz == 2)
-		*exclusions &= A_IS_2;
 	if (bsz == 1)
 		*exclusions &= B_IS_1;
 	else if (bsz == 0)
 		*exclusions &= B_IS_0;
-	else if (bsz == 2)
-		*exclusions &= B_IS_2;
 	return ;
 }
 
-static t_bool		next_lvl(t_psl *l, t_action pact, char lvl, char maxl)
+static t_bool		next_lvl(t_brute *datas, char lvl, t_action pac)
 {
-	t_action		act;
+	t_action		ac;
 	unsigned short	exclusions;
 
-/* 	exclusions = -1; */
-	fill_exclusions(AZS, BZS, pact, &exclusions);
-	act = 0;
-	while (act <= ss)
+	exclusions = -1;
+	fill_exclusions(datas->list->asz, datas->list->bsz, pac, &exclusions);
+	ac = 0;
+	while (ac <= ss)
 	{
 		// qprintf("while: %3s auth(%hd)\n", action_name(ac), (exclusions & 0x1));
-		if ((exclusions & 0x1) && ps_brute_solve_lvl(l, act, lvl, maxl))
+		if ((exclusions & 0x1) && ps_brute_solve_lvl(datas, lvl, ac))
 			return (true);
-		act++;
+		ac++;
 		exclusions >>= 1;
 	}
 	return (false);
 }
 
-inline t_bool				ps_brute_solve_lvl(t_psl *l, t_action act, char lvl, char maxl)
+inline t_bool				ps_brute_solve_lvl(t_brute *datas, char lvl, t_action ac)
 {
-	if (act != none)
-		apply_action(l, act);
-	if (lvl == maxl)
+	apply_actions(datas->list, ac);
+	if (lvl == datas->maxl)
 	{
-		if (ps_is_solved(l))
-		{
-/* 			ps_print_psl(l); */
-			return (true);
-		}
-		if (act != none)
-			rev_action(l);
+		if (is_solved(datas->list) == true)
+			return (save_step(datas->sol, &ac));
+		rev_actions(datas->list, ac);
 		return (false);
 	}
-	else if (next_lvl(l, act, lvl + 1, maxl))
-		return (true);
-	if (act != none)
-		rev_action(l);
+	else if (next_lvl(datas, lvl + 1, ac) == true)
+		return (save_step(datas->sol, &ac));
+	rev_actions(datas->list, ac);
 	return (false);
 }
-#define MAX_BRUTE_LVL 11
+#define MAX_BRUTE_LVL 10
 
-int					ps_brute_solve(t_psl *l)
+int					ps_brute_solve(t_pslist *orig, t_list *solution[1])
 {
+	t_brute		datas;
 	int			i;
 
 	i = 0;
 	while (i <= MAX_BRUTE_LVL)
 	{
-/* 		qprintf("\nCalling for %d:\n", i); */
-		if (ps_brute_solve_lvl(l, none, 0, i) == true)
+		ft_bzero(&datas, sizeof(t_brute));
+		datas.list = (t_pslist*)ft_memdup(orig, sizeof(t_pslist));
+		datas.maxl = i;
+		qprintf("\nCalling for %d:\n", i);
+		if (ps_brute_solve_lvl(&datas, 0, none) == true)
 		{
+			i = MAX_BRUTE_LVL;
 /* 			qprintf("true.\n"); */
-			break ;
 		}
 		else
 		{
+			
 /* 			qprintf("false.\n"); */
 		}
+/* 		print_list(datas.list); */
+		free(datas.list);
 		i++;
 	}
+	*solution = *datas.sol;
 	return (1);
 }
