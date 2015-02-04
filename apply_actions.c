@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:52:13 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 07:44:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/04 11:48:44 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,36 +61,3 @@ void		rev_action(t_psl *l)
 	else
 		l->act.zone_front--;
 }
-/*
-void		apply_actions(t_psl *l, t_action act)
-{
-	if (act <= rr)
-		apply_actions_r(l, act);
-	else if (act <= rrr)
-		apply_actions_rr(l, act);
-	else if (act <= pb)
-		apply_actions_p(l, act);
-	else if (act != none)
-		apply_actions_s(l, act);
-}
-
-void		rev_actions(t_psl *l, t_action act)
-{
-	if (act <= rr)
-		act += 3;
-	else if (act <= rrr)
-		act -= 3;
-	else if (act == pa)
-		act++;
-	else if (act == pb)
-		act--;
-	if (act <= rr)
-		apply_actions_r(l, act);
-	else if (act <= rrr)
-		apply_actions_rr(l, act);
-	else if (act <= pb)
-		apply_actions_p(l, act);
-	else if (act != none)
-		apply_actions_s(l, act);
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 10:26:53 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/04 11:25:09 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,19 @@ void		create_ref(t_psl *ref, size_t len)
 
 int			main(void)
 {
+//		2, 4, 3, 5, 7,  6, 1, 8
 	PS_TYPE	list[] = {
-		2, 4, 3, 5, 7,  6, 1, 8
+		2, 4, 3, 5, 7,  6, 1
 
-	};
+
 
 /* 		1, 2, 3, 4, 5, 1, */
 /* 		1, 2, 3, 4, 5, 1, */
 /* 		1, 2, 3, 4, 5, 1, */
 /* 		1, 2, 3, 4, 5, 1 */
+
+	};
+
 
 
 	size_t	len = sizeof(list) / sizeof(PS_TYPE);
@@ -85,10 +89,13 @@ int			main(void)
 	else										\
 		qprintf("not solved\n\n")
 
-	int i;
+/* 	int i; */
 /* 	for (i = 0; i < 3; i++) */
 	ps_brute_solve(&psl);
-	ps_print_psl(&psl);
-	(void)i;
+/* 	ps_print_psl(&psl); */
+
+	TEST(none);
+
+/* 	(void)i; */
 	return (0);
 }
