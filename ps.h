@@ -60,6 +60,7 @@ typedef struct	s_set
 	PS_TYPE		*ptr;
 	PS_TYPE		len;
 	PS_TYPE		last;
+	t_list		*to_b[1];
 }				t_set;
 
 typedef struct	s_psl
@@ -102,8 +103,9 @@ t_bool			ps_brute_solve_lvl(t_psl *l, t_action act, t_byte lvl, t_byte maxl);
 
 void            ps_set_solve(t_psl *l);
 void            ps_build_sets(const t_psl *l, t_list *lst[1]);
+void			build_alternatives_to_b(const t_psl *l, t_set *s);
 
-
+void		ps_dup_l(const t_psl *lref, t_psl **ldst);
 /*
 ** Debug
 */
@@ -113,7 +115,6 @@ const char		*ps_action_name(t_action action);
 void        ps_print_dstor(const t_dstor *dstor);
 void        ps_print_dbuff(const t_dbuff *dbuff);
 void		ps_print_psl(const t_psl *psl);
-
 
 
 #endif

@@ -30,7 +30,7 @@ void		create_ref(t_psl *ref, size_t len)
 {
 	DBUFF_T	i;
 
-	ft_dbuff_init(&ref->al, len, 0);
+	(void)ft_dbuff_init(&ref->al, len, 0);
 	i = 0;
 	while (i < len)
 	{
@@ -49,9 +49,11 @@ int			main(void)
 {
 //		2, 4, 3, 5, 7,  6, 1, 8
 	PS_TYPE	list[] = {
-		5, 8, 3, 4, 15, 7, 17, 16, 6, 9, 1, 2,14, 13, 10, 11, 12
-
-
+		// 5, 8, 3, 4, 15, 7, 17, 16, 6, 9, 1, 2,14, 13, 10, 11, 12
+		// 5, 8, 3, 4, 7, 6, 9, 1, 2
+		
+		3, 2, 1, 9, 4, 7, 5, 6, 8
+		// 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
 
 /* 		1, 2, 3, 4, 5, 1, */
 /* 		1, 2, 3, 4, 5, 1, */
@@ -63,9 +65,9 @@ int			main(void)
 	t_psl	ref;
 	t_psl	psl;
 
-	ft_dbuff_init(&psl.al, len + 25, 10);
-	ft_dbuff_init(&psl.bl, len + 25, 10);
-	ft_dstor_init(&psl.act, 0x20);
+	(void)ft_dbuff_init(&psl.al, len + 25, 10);
+	(void)ft_dbuff_init(&psl.bl, len + 25, 10);
+	(void)ft_dstor_init(&psl.act, 0x20);
 	create_ref(&ref, len);
 	fill_al(&psl.al, list, len);
 	ft_dbuff_recenter(&psl.al);

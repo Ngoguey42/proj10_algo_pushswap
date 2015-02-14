@@ -38,7 +38,7 @@ LFTGRE = gre
 SRCSFILES = main.c tools.c\
 apply_actions.c apply_actions_pertype.c\
 brute_solve.c\
-set_solve.c set_save.c\
+set_solve.c set_save.c set_to_b.c\
 debug.c
 
 SRC = $(addprefix $(SRCPATH)/,$(SRCSFILES))
