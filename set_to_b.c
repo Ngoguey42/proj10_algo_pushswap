@@ -29,13 +29,8 @@ static int		num_loops(const t_psl *l, DBUFF_T first, DBUFF_T last)
 	i = 0;
 	ret = 0;
 	ptr = l->al.zone_front;
-	
-	// D(unsigned char, first);
-	// D(unsigned char, last);
 	while (ptr >= l->al.zone_rear)
 	{
-		// D(void*, ptr);
-		// D(unsigned char, *ptr);
 		i++;
 		if (!in_set(*ptr, first, last))
 			ret = i;
@@ -44,19 +39,37 @@ static int		num_loops(const t_psl *l, DBUFF_T first, DBUFF_T last)
 	return (ret);
 }
 
+static size_t	ra_dist(DBUFF_T last, DBUFF_T *ptr)
+{
+	size_t	dist;
+
+	dist = 0;
+	while (*ptr != last)
+	{
+		dist++;
+		ptr--;
+	}
+	return (dist);
+}
+
+static void		recenter(t_psl *l, size_t radist, size_t rradist)
+{
+	if (radist <= rradist)
+		while (radist--)
+			apply_action(l, ra);
+	else
+		while (rradist--)
+			apply_action(l, rra);
+	return ;
+}
+
 void			build_alternatives_to_b(const t_psl *lref, t_set *s)
 {
 	t_psl	*l;
 	int		i;
-	// return ;
-	// ps_print_psl(lref);
-	// qprintf("Duping list\n");
+
 	ps_dup_l(lref, &l);
-	// ps_print_psl(lref);
-	// ps_print_psl(l);
-	// qprintf("Duped list\n");
 	i = num_loops(l, s->first, s->last);
-	// D(int, i);
 	while (i--)
 	{
 		if (!in_set(*l->al.zone_front, s->first, s->last))
@@ -64,12 +77,11 @@ void			build_alternatives_to_b(const t_psl *lref, t_set *s)
 		else
 			apply_action(l, ra);
 	}
+	i = ra_dist(s->last, l->al.zone_front);
+	recenter(l, i, AZS - i);
 	ps_print_psl(l);
-	// qprintf("lol\n");
-	// D(void*, s->to_b);
 	if (ft_lstnewback((t_list**)s->to_b, l, sizeof(t_psl)) == NULL)
 		exit(1);
-	// qprintf("lol\n");
 	free(l);
 	return ;
 }
