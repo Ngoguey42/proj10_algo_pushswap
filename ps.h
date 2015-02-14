@@ -115,6 +115,7 @@ const char		*ps_action_name(t_action action);
 void        ps_print_dstor(const t_dstor *dstor);
 void        ps_print_dbuff(const t_dbuff *dbuff);
 void		ps_print_psl(const t_psl *psl);
-
+void		ps_get_nb_grad(DBUFF_T nb, DBUFF_T init, char buf[16]);
+void		ps_print_dbuff_content(const t_dbuff *dbuff);
 
 #endif

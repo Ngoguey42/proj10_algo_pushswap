@@ -65,6 +65,7 @@ int			main(void)
 	t_psl	ref;
 	t_psl	psl;
 
+	(void)ps_get_nb_grad(0, len, (char[16]){});
 	(void)ft_dbuff_init(&psl.al, len + 25, 10);
 	(void)ft_dbuff_init(&psl.bl, len + 25, 10);
 	(void)ft_dstor_init(&psl.act, 0x20);

@@ -42,48 +42,12 @@ void		ps_print_dstor(const t_dstor *dstor)
 	return ;
 }
 
-static void	print_dbuff_content(const t_dbuff *dbuff)
-{
-	int	i;
-
-	i = 0;
-	ft_dprintf(2, ":yel:");
-	while (i < (int)dbuff->buf_size)
-	{
-		if (i == (int)(dbuff->zone_rear - dbuff->buf_rear))
-			ft_dprintf(2, ":eoc:");
-		if (i == (int)(dbuff->zone_front - dbuff->buf_rear + 1))
-			ft_dprintf(2, ":yel:");
-		ft_dprintf(2, "%hu", dbuff->buf_rear[i]);
-		i++;
-	}
-	ft_dprintf(2, ":eof:\n");
-
-	return ;
-}
-
-void		ps_print_dbuff(const t_dbuff *dbuff)
-{
-	ft_dprintf(2, "Dynamic buffer:\n");
-	ft_dprintf(2, "buff : rear{%16p} front{%16p} size(%u)\n",
-		dbuff->buf_rear, dbuff->buf_front, dbuff->buf_size);
-	ft_dprintf(2, "zone : rear{%16p} front{%16p} size(%u)\n",
-		dbuff->zone_rear, dbuff->zone_front, dbuff->zone_size);
-	if (dbuff->zone_size != 0)
-		ft_dprintf(2, "delta: rear{%16u} front{%16u} size(%u)\n",
-			dbuff->zone_rear - dbuff->buf_rear,
-			dbuff->buf_front - dbuff->zone_front,
-			dbuff->buf_size - dbuff->zone_size);
-	print_dbuff_content(dbuff);
-	return ;
-}
-
 void		ps_print_psl(const t_psl *psl)
 {
 	ft_dprintf(2, "Push Swap List:\nAl: ");
-	print_dbuff_content(&psl->al);
+	ps_print_dbuff_content(&psl->al);
 	ft_dprintf(2, "Bl: ");
-	print_dbuff_content(&psl->bl);
+	ps_print_dbuff_content(&psl->bl);
 	ft_dprintf(2, "Ac: ");
 	print_dstor_content(&psl->act);
 	ft_dprintf(2, "\n");
