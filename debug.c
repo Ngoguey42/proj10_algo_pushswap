@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:47 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/17 09:10:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/17 12:34:39 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ static void	print_dstor_content(const t_dstor *dstor)
 		if (i == (int)dstor->zone_size)
 			ft_dprintf(2, ":yel:");
 		if (i < (int)dstor->zone_size)
-			ft_dprintf(2, "%s ", ps_action_name(dstor->buf_rear[i]));
+		{
+			ft_dprintf(2, "%-3s ", ps_action_name(dstor->buf_rear[i]));
+			if (i != 0 && i % 16 == 0)
+				ft_putstr_fd("\n       ", 2);
+		}
 		else
 			ft_dprintf(2, "%hhu", dstor->buf_rear[i]);
 		i++;
@@ -48,7 +52,7 @@ void		ps_print_psl(const t_psl *psl)
 	ps_print_dbuff_content(&psl->al);
 	ft_dprintf(2, "Bl: ");
 	ps_print_dbuff_content(&psl->bl);
-	ft_dprintf(2, "Ac:%hu ", psl->act.zone_size);
+	ft_dprintf(2, "Ac:%3hu ", psl->act.zone_size);
 	print_dstor_content(&psl->act);
 	ft_dprintf(2, "\n");	
 	return ;

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:44:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/17 09:12:28 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/17 11:57:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 #define B_IS_3_PREV_R		(-1 - RB - RR)
 #define B_IS_3_PREV_RR		(-1 - RRB - RRR)
 
-#define MAX_BRUTE_LVL 12
+#define MAX_BRUTE_LVL 13
 
 static void		a_limit_exclusions(DBUFF_T asz, t_action pact,
 					t_dbyte *exclusions)
