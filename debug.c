@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:47 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 12:02:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/17 09:10:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,9 @@ void		ps_print_psl(const t_psl *psl)
 	ps_print_dbuff_content(&psl->al);
 	ft_dprintf(2, "Bl: ");
 	ps_print_dbuff_content(&psl->bl);
-	ft_dprintf(2, "Ac: ");
+	ft_dprintf(2, "Ac:%hu ", psl->act.zone_size);
 	print_dstor_content(&psl->act);
-	ft_dprintf(2, "\n");
-	
+	ft_dprintf(2, "\n");	
 	return ;
 }
 

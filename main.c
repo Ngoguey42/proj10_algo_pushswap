@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 14:05:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/17 09:12:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ void		create_ref(t_psl *ref, size_t len)
 	return ;
 }
 
+#define TEST(action)							\
+	apply_action(&psl, action);					\
+	ps_print_psl(&psl);							\
+	if (ps_is_solved(&psl))						\
+		qprintf("solved\n\n");					\
+	else										\
+		qprintf("not solved\n\n")
 
 int			main(void)
 {
@@ -64,28 +71,29 @@ int			main(void)
 	size_t	len = sizeof(list) / sizeof(PS_TYPE);
 	t_psl	ref;
 	t_psl	psl;
+	PEACE(t_psl	*, brute);
+
 
 	(void)ps_get_nb_grad(0, len, (char[16]){});
 	(void)ft_dbuff_init(&psl.al, len + 25, 10);
 	(void)ft_dbuff_init(&psl.bl, len + 25, 10);
 	(void)ft_dstor_init(&psl.act, 0x20);
+
+	
 	create_ref(&ref, len);
 	fill_al(&psl.al, list, len);
 	ft_dbuff_recenter(&psl.al);
 
-#define TEST(action)							\
-	apply_action(&psl, action);					\
-	ps_print_psl(&psl);							\
-	if (ps_is_solved(&psl))						\
-		qprintf("solved\n\n");					\
-	else										\
-		qprintf("not solved\n\n")
+	
+	ps_print_psl(&psl);
+	ps_dup_l(&psl, &brute);
+	ps_brute_solve(brute);
+	ps_print_psl(brute);
 
-	ps_print_psl(&psl);							
 
-/* 	ps_brute_solve(&psl); */
 	ps_set_solve(&psl);
-/* 	TEST(none); */
+
+
 
 	return (0);
 }
