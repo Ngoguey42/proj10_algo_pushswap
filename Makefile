@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 11:28:17 by ngoguey           #+#    #+#              #
-#    Updated: 2015/02/04 13:15:01 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/02/17 10:04:45 by ngoguey          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -38,7 +38,7 @@ LFTGRE = gre
 SRCSFILES = main.c tools.c\
 apply_actions.c apply_actions_pertype.c\
 brute_solve.c\
-set_solve.c set_save.c set_to_b.c\
+set_solve.c set_save.c set_to_b.c set_to_a.c\
 debug.c debug_dbuff.c
 
 SRC = $(addprefix $(SRCPATH)/,$(SRCSFILES))

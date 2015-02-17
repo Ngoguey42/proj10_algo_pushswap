@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/17 09:39:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/17 10:03:46 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct	s_tob
 void			ps_set_solve(t_psl *l);
 void			ps_build_sets(const t_psl *l, t_list *lst[1]);
 void			build_alternatives_to_b(const t_psl *l, t_set *s);
+void			build_alternatives_to_a(t_tob *tob);
 /*
 ** ************************************************************************** **
 ** 'Brute' solving.

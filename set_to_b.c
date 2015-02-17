@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/17 09:32:23 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/17 09:32:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/17 10:05:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ void			build_alternatives_to_b(const t_psl *lref, t_set *s)
 	}
 	i = ra_dist(s->last, l->al.zone_front);
 	recenter(l, i, AZS - i);
-	ps_print_psl(l);
-	if (ft_lstnewback((t_list**)s->to_b, l, sizeof(t_psl)) == NULL)
+	/* ps_print_psl(l); */
+	if (ft_lstnewback((t_list**)s->to_b,
+			&(t_tob){l, {NULL}}, sizeof(t_psl)) == NULL)
 		exit(1);
-	free(l);
 	return ;
 }
