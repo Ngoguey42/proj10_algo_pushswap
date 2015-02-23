@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 12:32:08 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 13:35:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/23 14:53:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int		tset_sort(const void *a, const void *b)
 }
 
 #define SOFT_CAP 5
-#define HARD_CAP 10
+#define HARD_CAP 30
 
 static void		trim_list(t_list *alst[1],
 							int tot, int totshortest, size_t *threeshold)

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 14:35:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/23 15:21:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int			main(int ac, char **av)
 
 	put_struct_ps(&ac, av, &corresp);
 
-	int i;
+	/* int i; */
 
-	for(i = 0; i <= ac;i++)
-	{
-		qprintf("%h2u %-5d\n", corresp.corresp[i], corresp.ref[i]);
+	/* for(i = 0; i <= ac;i++) */
+	/* { */
+		/* qprintf("%h2u %-5d\n", corresp.corresp[i], corresp.ref[i]); */
 		
-	}
+	/* } */
 	
 	/* return (0); */
 //		2, 4, 3, 5, 7,  6, 1, 8
@@ -90,8 +90,8 @@ int			main(int ac, char **av)
 	PEACE(t_psl	*, brute);
 
 	(void)ps_get_nb_grad(0, len, (char[16]){});
-	(void)ft_dbuff_init(&psl.al, len + 25, 10);
-	(void)ft_dbuff_init(&psl.bl, len + 25, 10);
+	(void)ft_dbuff_init(&psl.al, len + 2500, 1000);
+	(void)ft_dbuff_init(&psl.bl, len + 2500, 1000);
 	(void)ft_dstor_init(&psl.act, 0x20);
 
 	

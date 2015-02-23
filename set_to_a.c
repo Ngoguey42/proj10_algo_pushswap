@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/17 09:58:13 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/17 11:36:09 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/23 15:10:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void		build_alternatives_to_a(t_tob *tob)
 	tmp = ra_dist(1, AZF);
 	recenter(l, tmp, tot_size - tmp);
 	ps_print_psl(l);
+	/* exit(0); */
 	return ;
 }
