@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/17 12:20:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/23 14:35:16 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,26 @@ void		create_ref(t_psl *ref, size_t len)
 	else										\
 		qprintf("not solved\n\n")
 
-int			main(void)
+int			main(int ac, char **av)
+	
 {
+	/* PS_TYPE	*corresp; */
+	t_corresp	corresp;
+
+	put_struct_ps(&ac, av, &corresp);
+
+	int i;
+
+	for(i = 0; i <= ac;i++)
+	{
+		qprintf("%h2u %-5d\n", corresp.corresp[i], corresp.ref[i]);
+		
+	}
+	
+	/* return (0); */
 //		2, 4, 3, 5, 7,  6, 1, 8
-	PS_TYPE	list[] = {
-		5, 8, 3, 4, 15, 7, 17, 16, 6, 9, 1, 2,14, 13, 10, 11, 12
+	/* PS_TYPE	list[] = { */
+		/* 5, 8, 3, 4, 15, 7, 17, 16, 6, 9, 1, 2,14, 13, 10, 11, 12 */
 		// 5, 8, 3, 4, 7, 6, 9, 1, 2
 		
 		/* 3, 2, 1, 9, 4, 7, 5, 6, 8 */
@@ -67,12 +82,12 @@ int			main(void)
 /* 		1, 2, 3, 4, 5, 1, */
 /* 		1, 2, 3, 4, 5, 1 */
 
-	};
-	size_t	len = sizeof(list) / sizeof(PS_TYPE);
+	/* }; */
+	/* size_t	len = sizeof(list) / sizeof(PS_TYPE); */
+	size_t	len = ac;
 	t_psl	ref;
 	t_psl	psl;
 	PEACE(t_psl	*, brute);
-
 
 	(void)ps_get_nb_grad(0, len, (char[16]){});
 	(void)ft_dbuff_init(&psl.al, len + 25, 10);
@@ -81,7 +96,8 @@ int			main(void)
 
 	
 	create_ref(&ref, len);
-	fill_al(&psl.al, list, len);
+	fill_al(&psl.al, corresp.corresp, len);
+	/* fill_al(&psl.al, list, len); */
 	ft_dbuff_recenter(&psl.al);
 
 	

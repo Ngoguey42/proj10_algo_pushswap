@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/17 10:03:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/23 14:26:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@
 ** ************************************************************************** **
 ** Game handling.
 */
+
+typedef struct	s_corresp
+{
+	int			*ref;
+	PS_TYPE		*corresp;
+}				t_corresp;
 
 /*
 **	'struct s_psl' represents the game at a given time.
@@ -138,6 +144,10 @@ t_bool			ps_brute_solve_lvl(t_psl *l, t_action,
 */
 t_bool			ps_is_solved(const t_psl *l);
 void			ps_dup_l(const t_psl *lref, t_psl **ldst);
+void			ft_exit(char *str);
+void			put_a_b_solved(t_corresp *corresp, int ac);
+void			put_struct_ps(int *ac, char **av, t_corresp *corresp);
+
 
 /*
 ** Debug

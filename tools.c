@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:50:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 11:50:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/23 14:06:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,13 @@ void		ps_dup_l(const t_psl *lref, t_psl **ldst)
 	(void)ft_dbuff_dup(&lref->bl, &l->bl);
 	(void)ft_dstor_dup(&lref->act, &l->act);
 	*ldst = l;
+	return ;
+}
+
+void		ft_exit(char *str)
+{
+	if (str != NULL)
+		ft_putendl_fd(str, 2);
+	exit(0);
 	return ;
 }
