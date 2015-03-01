@@ -33,14 +33,9 @@ void		ps_dup_l(const t_psl *lref, t_psl **ldst)
 {
 	t_psl	*l;
 
-	// qprintf("salut\n");
 	if (!(l = (t_psl*)malloc(sizeof(t_psl))))
 		exit(0);
-	// qprintf("salut\n");
 	(void)ft_dbuff_dup(&lref->al, &l->al);
-	// ps_print_dbuff(&lref->al);
-	// ps_print_dbuff(&l->al);
-	// qprintf("salut\n");
 	(void)ft_dbuff_dup(&lref->bl, &l->bl);
 	(void)ft_dstor_dup(&lref->act, &l->act);
 	*ldst = l;

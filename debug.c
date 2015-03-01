@@ -24,8 +24,8 @@ static void	print_dstor_content(const t_dstor *dstor)
 		if (i < (int)dstor->zone_size)
 		{
 			ft_dprintf(2, "%s ", ps_action_name(dstor->buf_rear[i]));
-			/* if (i != 0 && i % 16 == 0) */
-				/* ft_putstr_fd("\n       ", 2); */
+			if (i != 0 && i % 16 == 0)
+				ft_putstr_fd("\n       ", 2);
 		}
 		else
 			ft_dprintf(2, "%hhu", dstor->buf_rear[i]);
@@ -49,11 +49,11 @@ void		ps_print_dstor(const t_dstor *dstor)
 void		ps_print_psl(const t_psl *psl)
 {
 	ft_dprintf(2, "Push Swap List:\nAl: ");
-	/* ps_print_dbuff_content(&psl->al); */
+	ps_print_dbuff_content(&psl->al);
 	ft_dprintf(2, "Bl: ");
-	/* ps_print_dbuff_content(&psl->bl); */
+	ps_print_dbuff_content(&psl->bl);
 	ft_dprintf(2, "Ac:%3hu ", psl->act.zone_size);
-	/* print_dstor_content(&psl->act); */
+	print_dstor_content(&psl->act);
 	ft_dprintf(2, "\n");	
 	return ;
 }

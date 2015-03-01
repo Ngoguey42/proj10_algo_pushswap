@@ -13,7 +13,7 @@
 #include <ps.h>
 #include <stdlib.h>
 
-void		fill_al(t_dbuff *al, PS_TYPE *list, size_t len)
+static void	fill_al(t_dbuff *al, PS_TYPE *list, size_t len)
 {
 	DBUFF_T	*ptr;
 
@@ -26,7 +26,7 @@ void		fill_al(t_dbuff *al, PS_TYPE *list, size_t len)
 	return ;
 }
 
-void		create_ref(t_psl *ref, size_t len)
+static void	create_ref(t_psl *ref, size_t len)
 {
 	DBUFF_T	i;
 
@@ -44,72 +44,27 @@ void		create_ref(t_psl *ref, size_t len)
 	return ;
 }
 
-#define TEST(action)							\
-	apply_action(&psl, action);					\
-	ps_print_psl(&psl);							\
-	if (ps_is_solved(&psl))						\
-		qprintf("solved\n\n");					\
-	else										\
-		qprintf("not solved\n\n")
-
 int			main(int ac, char **av)
-	
 {
-	/* PS_TYPE	*corresp; */
 	t_corresp	corresp;
-
-	put_struct_ps(&ac, av, &corresp);
-
-	/* int i; */
-
-	/* for(i = 0; i <= ac;i++) */
-	/* { */
-		/* qprintf("%h2u %-5d\n", corresp.corresp[i], corresp.ref[i]); */
-		
-	/* } */
-	
-	/* return (0); */
-//		2, 4, 3, 5, 7,  6, 1, 8
-	/* PS_TYPE	list[] = { */
-		/* 5, 8, 3, 4, 15, 7, 17, 16, 6, 9, 1, 2,14, 13, 10, 11, 12 */
-		// 5, 8, 3, 4, 7, 6, 9, 1, 2
-		
-		/* 3, 2, 1, 9, 4, 7, 5, 6, 8 */
-		// 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
-
-/* 		1, 2, 3, 4, 5, 1, */
-/* 		1, 2, 3, 4, 5, 1, */
-/* 		1, 2, 3, 4, 5, 1, */
-/* 		1, 2, 3, 4, 5, 1 */
-
-	/* }; */
-	/* size_t	len = sizeof(list) / sizeof(PS_TYPE); */
-	size_t	len = ac;
-	t_psl	ref;
-	t_psl	psl;
+	t_psl		ref;
+	t_psl		psl;
 	PEACE(t_psl	*, brute);
 
-	(void)ps_get_nb_grad(0, len, (char[16]){});
-	(void)ft_dbuff_init(&psl.al, len + 2500, 1000);
-	(void)ft_dbuff_init(&psl.bl, len + 2500, 1000);
-	(void)ft_dstor_init(&psl.act, 0x20);
-
+	put_struct_ps(&ac, av, &corresp); //read ac av
+	create_ref(&ref, ac); //initialize reference
+	(void)ps_get_nb_grad(0, ac, (char[16]){});//initialize debug's gradient
 	
-	create_ref(&ref, len);
-	fill_al(&psl.al, corresp.corresp, len);
-	/* fill_al(&psl.al, list, len); */
-	ft_dbuff_recenter(&psl.al);
+	(void)ft_dbuff_init(&psl.al, ac + (ac * 5), ac * 2);//init main struct
+	(void)ft_dbuff_init(&psl.bl, ac + (ac * 5), ac * 2);//init main struct
+	(void)ft_dstor_init(&psl.act, 0x20);//init main struct
+	fill_al(&psl.al, corresp.corresp, ac); //remplit la liste initiale
+	ft_dbuff_recenter(&psl.al); //recentre la liste initiale
 
-	
-	ps_print_psl(&psl);
-	ps_dup_l(&psl, &brute);
-	ps_brute_solve(brute);
-	ps_print_psl(brute);
-
+	ps_dup_l(&psl, &brute); //cree la liste pour brute solve
+	ps_brute_solve(brute); //fait le brute solve
+	ps_print_psl(brute); //print le brute solve
 
 	ps_set_solve(&psl);
-
-
-
 	return (0);
 }
