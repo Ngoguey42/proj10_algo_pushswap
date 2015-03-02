@@ -36,8 +36,6 @@
 #define B_IS_3_PREV_R		(-1 - RB - RR)
 #define B_IS_3_PREV_RR		(-1 - RRB - RRR)
 
-#define MAX_BRUTE_LVL 13
-
 static void		a_limit_exclusions(DBUFF_T asz, t_action pact,
 					t_dbyte *exclusions)
 {

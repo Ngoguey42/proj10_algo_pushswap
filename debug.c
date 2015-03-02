@@ -51,9 +51,9 @@ void		ps_print_psl(const t_psl *psl)
 	ft_dprintf(2, "Push Swap List:\nAl: ");
 	ps_print_dbuff_content(&psl->al);
 	ft_dprintf(2, "Bl: ");
-	ps_print_dbuff_content(&psl->bl);
-	ft_dprintf(2, "Ac:%3hu ", psl->act.zone_size);
-	print_dstor_content(&psl->act);
+	// ps_print_dbuff_content(&psl->bl);
+	ft_dprintf(2, "Ac:%3zu ", psl->act.zone_size);
+	// print_dstor_content(&psl->act);
 	ft_dprintf(2, "\n");	
 	return ;
 }

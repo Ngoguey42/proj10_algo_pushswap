@@ -84,9 +84,22 @@ void			build_alternatives_to_b(const t_psl *lref, t_set *s)
 	while (i--)
 	{
 		if (!in_set(*l->al.zone_front, s->first, s->last))
+		{
 			apply_action(l, pb);
+			// if (BZS > 1 && *BZF < *(BZF - 1))
+			// {
+				// apply_action(l, rrb);
+			// }
+			// else if (BZS > 1)
+				// apply_action(l, sb);
+		}
 		else
-			apply_action(l, ra);
+		{
+			// if (BZS > 1 && *BZF > *(BZF - 1))
+				// apply_action(l, rr);
+			// else
+				apply_action(l, ra);
+		}
 	}
 	i = ra_dist(s->last, l->al.zone_front);
 	recenter(l, i, AZS - i);

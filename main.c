@@ -63,8 +63,10 @@ int			main(int ac, char **av)
 
 	ps_dup_l(&psl, &brute); //cree la liste pour brute solve
 	ps_brute_solve(brute); //fait le brute solve
-	ps_print_psl(brute); //print le brute solve
+	// ps_print_psl(brute); //print le brute solve
 
 	ps_set_solve(&psl);
+	qprintf("%d movements\n", ps_total_movements(NULL));
+	ps_printbest_solution();
 	return (0);
 }

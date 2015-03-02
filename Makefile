@@ -39,7 +39,7 @@ SRCSFILES = main.c tools.c\
 put_struct_ps2.c put_struct_ps.c\
 apply_actions.c apply_actions_pertype.c\
 brute_solve.c\
-set_solve.c set_save.c set_to_b.c set_to_a.c\
+set_solve.c set_save.c set_to_b.c set_to_a.c set_solutions.c\
 debug.c debug_dbuff.c
 
 

@@ -16,6 +16,12 @@
 # include <ft_debug.h>
 # include <libft.h>
 
+
+# define MAX_BRUTE_LVL 12
+# define SOFT_CAP 10
+# define HARD_CAP 10
+# define MAX_SET_MOVEMENTS (1000 * 1000 * 1)
+
 # define PS_TYPE DBUFF_T
 
 # define BZF (l->bl.zone_front)
@@ -127,6 +133,9 @@ void			ps_set_solve(t_psl *l);
 void			ps_build_sets(const t_psl *l, t_list *lst[1]);
 void			build_alternatives_to_b(const t_psl *l, t_set *s);
 void			build_alternatives_to_a(t_tob *tob);
+t_psl			*ps_solution_storing(t_psl *l);
+void			ps_printbest_solution(void);
+int				ps_total_movements(const t_psl *l);
 /*
 ** ************************************************************************** **
 ** 'Brute' solving.
@@ -147,7 +156,7 @@ void			ps_dup_l(const t_psl *lref, t_psl **ldst);
 void			ft_exit(char *str);
 void			put_a_b_solved(t_corresp *corresp, int ac);
 void			put_struct_ps(int *ac, char **av, t_corresp *corresp);
-
+void			ps_free_l(t_psl **l, t_bool free_struct);
 
 /*
 ** Debug

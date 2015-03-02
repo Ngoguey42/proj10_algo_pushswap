@@ -13,8 +13,9 @@
 #include <ps.h>
 #include <stdlib.h>
 #include <unistd.h>
+#define NEXT(val, max) (val == 1 ? max : val - 1)
 
-static DBUFF_T   ra_dist(DBUFF_T last, DBUFF_T *ptr)
+static DBUFF_T   r_dist(DBUFF_T last, DBUFF_T *ptr)
 {
 	DBUFF_T  dist;
 
@@ -27,7 +28,27 @@ static DBUFF_T   ra_dist(DBUFF_T last, DBUFF_T *ptr)
 	return (dist);
 }
 
-static void	recenter(t_psl *l, DBUFF_T radist, DBUFF_T rradist)
+static int	recenter_b(t_psl *l, t_action action, DBUFF_T tot, DBUFF_T nnext)
+{
+	int		next_moved;
+	
+	next_moved = 0;
+	while (tot--)
+	{
+		if (*BZF == nnext)
+		{
+			apply_action(l, pa);
+			next_moved = 1;
+			if (action == rrb)
+				apply_action(l, rrb);
+		}
+		else
+			apply_action(l, action);
+	}
+	return (next_moved);
+}
+
+static void	recenter_a(t_psl *l, DBUFF_T radist, DBUFF_T rradist)
 {
 	if (radist <= rradist)
 		while (radist--)
@@ -44,22 +65,25 @@ void		build_alternatives_to_a(t_tob *tob)
 	PS_TYPE	next;
 	PS_TYPE	tot_size;
 	PS_TYPE	tmp;
+	int		next_moved;
 
 	ps_dup_l(tob->l, &l);
 	tot_size = AZS + BZS;
 	while (BZS > 0)
 	{
-		next = *AZF - 1;
-		if (next == 0)
-			next = tot_size;
-		if (*BZF == next)
-			apply_action(l, pa);
+		
+		next = NEXT(*AZF, tot_size);
+		tmp = r_dist(next, BZF);
+		if (tmp <= BZS - tmp)
+			next_moved = recenter_b(l, rb, tmp, NEXT(next, tot_size));
 		else
-			apply_action(l, rb);
+			next_moved = recenter_b(l, rrb, BZS - tmp, NEXT(next, tot_size));
+		apply_action(l, pa);
+		if (next_moved)
+			apply_action(l, sa);
 	}
-	tmp = ra_dist(1, AZF);
-	recenter(l, tmp, tot_size - tmp);
-	ps_print_psl(l);
-	/* exit(0); */
+	tmp = r_dist(1, AZF);
+	recenter_a(l, tmp, tot_size - tmp);
+	ps_solution_storing(l);
 	return ;
 }

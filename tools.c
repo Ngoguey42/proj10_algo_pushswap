@@ -42,6 +42,16 @@ void		ps_dup_l(const t_psl *lref, t_psl **ldst)
 	return ;
 }
 
+void		ps_free_l(t_psl **l, t_bool free_struct)
+{
+	free((*l)->al.buf_rear);
+	free((*l)->bl.buf_rear);
+	free((*l)->act.buf_rear);
+	if (free_struct)
+		free(*l);
+	return ;
+}
+
 void		ft_exit(char *str)
 {
 	if (str != NULL)
