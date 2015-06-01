@@ -6,14 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:52:15 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 11:49:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/01 18:23:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ps.h>
 
 /*
-** Undefined if called for an impossible action.
+** Each function apply an action on 'l' according to 'act'.
 */
 
 void		apply_actions_r(t_psl *l, t_action act)

@@ -6,12 +6,23 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:50:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 14:06:15 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/01 18:11:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <ps.h>
+
+/*
+** 'ps_is_solved'	Checks if a given 't_psl' is solved.
+** 		Is first called by 'create_ref' to initialize reference.
+** *
+** 'ps_dup_l'		duplicates a given 't_psl'.
+** *
+** 'ps_free_l'		frees a given 't_psl'
+** *
+** 'ft_exit'		exitsm printing a message to cerr.
+*/
 
 t_bool		ps_is_solved(const t_psl *l)
 {

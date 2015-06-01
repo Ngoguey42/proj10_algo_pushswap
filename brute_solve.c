@@ -6,11 +6,25 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:44:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/17 11:57:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/01 18:21:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ps.h>
+
+/*
+** 'ps_brute_solve'		Entry point of the brute solving.
+** 			Calls 'ps_brute_solve_lvl' MAX_BRUTE_LVL times or until solved.
+** *
+** 'ps_brute_solve_lvl'	Applies or reverses actions, according to parameters.
+** *
+** 'next_lvl'			Checks list's data.
+** 			May call next levels of solving, if meaningful.
+** *
+** 'b_limit_exclusions'	Checks if list is solvable, according to b list.
+** *
+** 'a_limit_exclusions'	Checks if list is solvable, according to a list.
+*/
 
 #define RA_EX	(-1 - RB - RRA - RRR		- SB - RRB)
 #define RB_EX	(-1 - RA - RRB - RRR		- SA - RRA)

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 14:17:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 14:45:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/01 18:27:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void			put_a_b_solved(t_corresp *corresp, int ac)
 	{
 		check_for_duplicates(corresp->ref, ac, i, corresp->ref[i]);
 		corresp->corresp[i] = give_simple_nb(corresp->ref, ac, i);
-		/* corresp->corresp[i] = give_simple_nb(corresp->ref, ac, i); */
 		i++;
 	}
 }

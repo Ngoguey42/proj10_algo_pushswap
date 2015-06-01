@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 14:01:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 14:47:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/01 18:26:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,15 @@ static void		check_and_put_savereal(int *ac, char **av, t_corresp *corresp)
 	if (*ac == 0)
 		ft_exit("Error");
 	corresp->ref = (int*)malloc(sizeof(int) * (*ac + 1));
-		if (!corresp->ref)
+	if (!corresp->ref)
 		ft_exit("Error");
 	corresp->ref[*ac] = 0;
-	i = *ac -1;
+	i = *ac - 1;
 	j = 0;
 	while (i >= 0)
 	{
 		check_the_nb(av[i + 1]);
-		/* corresp->ref[*ac - i + 1] = ft_atoi(av[i]); */
 		corresp->ref[j] = ft_atoi(av[i + 1]);
-		/* D(int, j); */
-		/* D(int, corresp->ref[j]); */
 		i--;
 		j++;
 	}

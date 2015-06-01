@@ -6,11 +6,17 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 10:52:13 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/04 11:48:44 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/01 18:23:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ps.h>
+
+/*
+** 'apply_action'		applies 'act' on 'l'.
+** *
+** 'rev_action'			reverses last action on 'l'.
+*/
 
 void		apply_action(t_psl *l, t_action act)
 {

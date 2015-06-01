@@ -6,14 +6,22 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/01 18:03:12 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/01 18:35:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ps.h>
 #include <stdlib.h>
 
-static void	fill_al(t_dbuff *al, PS_TYPE *list, size_t len)
+/*
+** 'fill_al'		Fills the main 't_psl' from 'corresp'.
+** *
+** 'create_ref'		Creates a 't_psl' reference in order to memcmp in
+** 						'ps_is_solved'.
+** *
+*/
+
+static void	fill_al(t_dbuff *al, PS_TYPE const *list, size_t len)
 {
 	DBUFF_T	*ptr;
 
@@ -62,11 +70,13 @@ int			main(int ac, char **av)
 	ft_dbuff_recenter(&psl.al); //recentre la liste initiale
 
 	ps_dup_l(&psl, &brute); //cree la liste pour brute solve
-	ps_brute_solve(brute); //fait le brute solve
-	ps_print_psl(brute); //print le brute solve
-
-	/* ps_set_solve(&psl); */
-	/* qprintf("%d movements\n", ps_total_movements(NULL)); */
+	if (ps_brute_solve(brute)) //fait le brute solve
+	{
+		ps_print_psl(brute); //print le brute solve
+		return (0);
+	}
+	ps_set_solve(&psl);
+	qprintf("%d movements\n", ps_total_movements(NULL));// debug
 	ps_printbest_solution();
 	return (0);
 }
