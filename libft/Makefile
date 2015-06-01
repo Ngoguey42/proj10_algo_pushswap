@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 11:29:36 by ngoguey           #+#    #+#              #
-#    Updated: 2015/02/10 07:44:32 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/06/01 17:56:02 by ngoguey          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,7 +19,7 @@ PTFSRCPATH = $(SRCPATH)/printf
 OBJPATH = obj
 
 # CC = /bin/i686-w64-mingw32-gcc.exe
-CC = gcc
+CC = clang
 BASEFLAGS = -Wall -Wextra
 CFLAGS = $(BASEFLAGS) -Werror -O2
 DEBUGFLAGS = $(BASEFLAGS) -g

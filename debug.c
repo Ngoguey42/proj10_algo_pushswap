@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:47 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 15:18:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/01 18:03:52 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void		ps_print_psl(const t_psl *psl)
 	ft_dprintf(2, "Push Swap List:\nAl: ");
 	ps_print_dbuff_content(&psl->al);
 	ft_dprintf(2, "Bl: ");
-	// ps_print_dbuff_content(&psl->bl);
+	ps_print_dbuff_content(&psl->bl);
 	ft_dprintf(2, "Ac:%3zu ", psl->act.zone_size);
-	// print_dstor_content(&psl->act);
+	print_dstor_content(&psl->act);
 	ft_dprintf(2, "\n");	
 	return ;
 }

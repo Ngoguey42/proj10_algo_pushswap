@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 11:28:17 by ngoguey           #+#    #+#              #
-#    Updated: 2015/02/23 14:24:21 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/06/01 17:56:43 by ngoguey          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,7 +21,7 @@ OBJPATH = obj
 SRCPATH = .
 INCLUDE = -I ./
 
-CC = gcc
+CC = clang
 
 LIBS = $(LFT)
 INCLUDES = $(INCLUDE) $(LFTIPATH)
@@ -69,14 +69,12 @@ $(OBJECTS): $(OBJPATH)/%.o : $(SRCPATH)/%.c
 		"=>CFLAGS"\
 		"$(CFLAGS)"\
 		"=>INCLUDES"\
-		"$(INCLUDES)"\
-		"=>LIBS"\
-		"$(LIBS)" ;\
+		"$(INCLUDES)" ;\
 	fi
 	$(eval W = 1)
 	@mkdir -p $(dir $@)
-	@echo -e "$(R)COMPILER$(E) -o $@ $(R)CFLAGS INCLUDES LIBS$(E) -c [...].c"
-	@$(CC) -o $@ $(CFLAGS) $(INCLUDES) $(LIBS) -c $<
+	@echo -e "$(R)COMPILER$(E) -o $@ $(R)CFLAGS INCLUDES$(E) -c [...].c"
+	@$(CC) -o $@ $(CFLAGS) $(INCLUDES) -c $<
 
 clean:
 	$(RM) $(OBJPATH)

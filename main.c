@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 15:21:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/01 18:03:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			main(int ac, char **av)
 	t_corresp	corresp;
 	t_psl		ref;
 	t_psl		psl;
-	PEACE(t_psl	*, brute);
+	t_psl		*brute;
 
 	put_struct_ps(&ac, av, &corresp); //read ac av
 	create_ref(&ref, ac); //initialize reference
@@ -63,10 +63,10 @@ int			main(int ac, char **av)
 
 	ps_dup_l(&psl, &brute); //cree la liste pour brute solve
 	ps_brute_solve(brute); //fait le brute solve
-	// ps_print_psl(brute); //print le brute solve
+	ps_print_psl(brute); //print le brute solve
 
-	ps_set_solve(&psl);
-	qprintf("%d movements\n", ps_total_movements(NULL));
+	/* ps_set_solve(&psl); */
+	/* qprintf("%d movements\n", ps_total_movements(NULL)); */
 	ps_printbest_solution();
 	return (0);
 }

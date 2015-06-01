@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 14:26:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/01 18:00:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <ft_debug.h>
 # include <libft.h>
-
 
 # define MAX_BRUTE_LVL 12
 # define SOFT_CAP 10
