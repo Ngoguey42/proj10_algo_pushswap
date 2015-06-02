@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/01 18:35:15 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 12:21:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@
 ** 'create_ref'		Creates a 't_psl' reference in order to memcmp in
 ** 						'ps_is_solved'.
 ** *
+** 'main'
+** 		'put_struct_ps'		Reads ac, av. Might exit
+** 		'create_ref'		Initialize a ref 't_psl' containing numbers
+** 								in the wished order in the a-list.
+** 		'ps_get_nb_grad'	Debug.
+** 		'ft_dbuff_init'x2	Initializes both lists in 'psl'
+** 		'ft_dstor_init'		Initializes actions buffer in 'psl'
+** 		'fill_al'			Fills 'psl' with the arguments received.
+** 		'ft_dbuff_recenter'	Recenters a-list's arguments in 'psl'
+** 		'ps_dup_l'			Duplicates 'psl' before trying to solve.
+** 		'ps_brute_solve'	Tries 'brute solving' solution.
+** 		'ps_set_solve'		Tries 'set solving' solution.
+**		'ps_printbest_solution'		Print best solution from 'set solving'
 */
 
 static void	fill_al(t_dbuff *al, PS_TYPE const *list, size_t len)
@@ -47,7 +60,6 @@ static void	create_ref(t_psl *ref, size_t len)
 	}
 	ref->al.zone_rear = ref->al.buf_rear;
 	ref->al.zone_size = len;
-	ps_print_dbuff(&ref->al);
 	ps_is_solved(ref);
 	return ;
 }
@@ -59,24 +71,20 @@ int			main(int ac, char **av)
 	t_psl		psl;
 	t_psl		*brute;
 
-	put_struct_ps(&ac, av, &corresp); //read ac av
-	create_ref(&ref, ac); //initialize reference
-	(void)ps_get_nb_grad(0, ac, (char[16]){});//initialize debug's gradient
-	
-	(void)ft_dbuff_init(&psl.al, ac + (ac * 5), ac * 2);//init main struct
-	(void)ft_dbuff_init(&psl.bl, ac + (ac * 5), ac * 2);//init main struct
-	(void)ft_dstor_init(&psl.act, 0x20);//init main struct
-	fill_al(&psl.al, corresp.corresp, ac); //remplit la liste initiale
-	ft_dbuff_recenter(&psl.al); //recentre la liste initiale
-
-	ps_dup_l(&psl, &brute); //cree la liste pour brute solve
-	if (ps_brute_solve(brute)) //fait le brute solve
+	put_struct_ps(&ac, av, &corresp);
+	create_ref(&ref, ac);
+	(void)ft_dbuff_init(&psl.al, ac + (ac * 5), ac * 2);
+	(void)ft_dbuff_init(&psl.bl, ac + (ac * 5), ac * 2);
+	(void)ft_dstor_init(&psl.act, 0x20);
+	fill_al(&psl.al, corresp.corresp, ac);
+	ft_dbuff_recenter(&psl.al);
+	ps_dup_l(&psl, &brute);
+	if (ps_brute_solve(brute))
 	{
-		ps_print_psl(brute); //print le brute solve
+		ps_print_psl(brute);
 		return (0);
 	}
 	ps_set_solve(&psl);
-	qprintf("%d movements\n", ps_total_movements(NULL));// debug
 	ps_printbest_solution();
 	return (0);
 }
