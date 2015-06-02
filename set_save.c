@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 12:32:08 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 14:53:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 14:13:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static size_t	set_len(const t_psl *l, const PS_TYPE *ptr_ref)
 		{
 			expected--;
 			len++;
-
 		}
 		if (ptr == ptr_ref)
 			break ;
@@ -45,7 +44,6 @@ static int		tset_sort(const void *a, const void *b)
 {
 	return (((const t_set*)a)->len >= ((const t_set*)b)->len);
 }
-
 
 static void		trim_list(t_list *alst[1],
 							int tot, int totshortest, size_t *threeshold)

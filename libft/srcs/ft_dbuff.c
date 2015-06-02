@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 07:55:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/10 07:40:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 14:40:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,6 @@
 **				'zone_size' should never be 0 when resizing.
 */
 
-// void		ft_dbuff_initzone(t_dbuff *dbuff, size_t rear_pad, DBUFF_T v)
-// {
-	// return ;
-	// dbuff->zone_size = 1;
-	// dbuff->zone_rear = dbuff->buf_front + rear_pad;
-	// dbuff->zone_front = dbuff->zone_rear;
-	// *dbuff->zone_rear = v;
-	// return ;
-// }
-
 int			ft_dbuff_dup(const t_dbuff *ref, t_dbuff *dst)
 {
 	ptrdiff_t	diff;
@@ -42,17 +32,10 @@ int			ft_dbuff_dup(const t_dbuff *ref, t_dbuff *dst)
 	if (dst->buf_rear == NULL)
 		return (ENOMEM);
 	diff = (void*)dst->buf_rear - (void*)ref->buf_rear;
-	// dst->buf_rear = (void*)dst->buf_rear + diff;
 	dst->buf_front = (void*)dst->buf_front + diff;
 	dst->zone_rear = (void*)dst->zone_rear + diff;
 	dst->zone_front = (void*)dst->zone_front + diff;
 	dst->zone_start = (void*)dst->zone_start + diff;
-	
-	
-	// dst->buf_front += diff;
-	// dst->zone_rear += diff;
-	// dst->zone_front += diff;
-	// dst->zone_start += diff;
 	return (0);
 }
 

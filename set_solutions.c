@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/02 11:51:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/02 12:54:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 14:14:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_psl			*ps_solution_storing(t_psl *l)
 
 void			ps_printbest_solution(void)
 {
-	t_psl*	l;
+	t_psl	*l;
 
 	l = ps_solution_storing(NULL);
 	if (l == NULL)
@@ -52,7 +52,7 @@ void			ps_printbest_solution(void)
 	else
 	{
 		ps_print_psl(l);
-		ps_free_l(&l, true); //dunno
+		ps_free_l(&l, true);
 	}
 	return ;
 }

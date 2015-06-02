@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/17 09:32:23 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/17 10:05:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 14:38:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 static t_bool	in_set(DBUFF_T nb, DBUFF_T first, DBUFF_T last)
 {
-	// 9 8 7 6		
-	// 3 2 1 9		
 	if (first > last)
 	{
 		if (nb > first || nb < last)
@@ -78,34 +76,22 @@ void			build_alternatives_to_b(const t_psl *lref, t_set *s)
 {
 	t_psl	*l;
 	int		i;
+	t_tob	tmp;
 
 	ps_dup_l(lref, &l);
 	i = num_loops(l, s->first, s->last);
 	while (i--)
 	{
 		if (!in_set(*l->al.zone_front, s->first, s->last))
-		{
 			apply_action(l, pb);
-			// if (BZS > 1 && *BZF < *(BZF - 1))
-			// {
-				// apply_action(l, rrb);
-			// }
-			// else if (BZS > 1)
-				// apply_action(l, sb);
-		}
 		else
-		{
-			// if (BZS > 1 && *BZF > *(BZF - 1))
-				// apply_action(l, rr);
-			// else
-				apply_action(l, ra);
-		}
+			apply_action(l, ra);
 	}
 	i = ra_dist(s->last, l->al.zone_front);
 	recenter(l, i, AZS - i);
-	/* ps_print_psl(l); */
-	if (ft_lstnewback((t_list**)s->to_b,
-			&(t_tob){l, {NULL}}, sizeof(t_psl)) == NULL)
+	tmp.l = l;
+	*tmp.to_a = NULL;
+	if (ft_lstnewback((t_list**)s->to_b, &tmp, sizeof(t_psl)) == NULL)
 		exit(1);
 	return ;
 }

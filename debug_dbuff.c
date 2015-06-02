@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:47 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/03 12:02:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 14:39:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		ps_get_nb_grad(DBUFF_T nb, DBUFF_T init, char buf[16])
 		ft_strcpy(buf, ":red::dar::und:");
 	else
 		tenth(nb, num_vals, buf);
-	return;
+	return ;
 }
 
 void		ps_print_dbuff_content(const t_dbuff *dbuff)
@@ -77,16 +77,11 @@ void		ps_print_dbuff_content(const t_dbuff *dbuff)
 	ft_dprintf(2, ":yel:");
 	while (i < (int)dbuff->buf_size)
 	{
-		// if (i == (int)(dbuff->zone_rear - dbuff->buf_rear))
-			// ft_dprintf(2, ":eoc:");
-		// if (i == (int)(dbuff->zone_front - dbuff->buf_rear + 1))
-			// ft_dprintf(2, ":yel:");
 		ps_get_nb_grad(dbuff->buf_rear[i], 0, buf);
 		ft_dprintf(2, "%s%hu\033[0m", buf, dbuff->buf_rear[i]);
 		i++;
 	}
 	ft_dprintf(2, ":eof:\n");
-
 	return ;
 }
 

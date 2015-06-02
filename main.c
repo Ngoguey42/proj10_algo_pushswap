@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/02 13:22:49 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 14:11:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,9 @@ int			main(int ac, char **av)
 	if (ps_brute_solve(brute))
 	{
 		ps_print_psl(brute);
-		checkLeaks();
-/* 		while (1) (void)1; */
 		return (0);
 	}
 	ps_set_solve(&psl);
 	ps_printbest_solution();
-	checkLeaks();
-/* 	while (1) (void)1; */
 	return (0);
 }

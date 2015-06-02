@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/02 13:05:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 14:43:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int				ps_total_movements(const t_psl *l);
 ** Try each meaningful combinations, up to MAX_BRUTE_LVL(~13) actions.
 */
 t_bool			ps_brute_solve(t_psl *l);
-t_bool			ps_brute_solve_lvl(t_psl *l, t_action,
+t_bool			ps_brute_solve_lvl(t_psl *l, t_action a,
 					t_byte lvl, t_byte maxl);
 /*
 ** ************************************************************************** **
@@ -161,11 +161,11 @@ void			ps_free_setlistlink_content(void *content, size_t size);
 /*
 ** Debug
 */
-const char	*ps_action_name(t_action action);
-void		ps_print_dstor(const t_dstor *dstor);
-void		ps_print_dbuff(const t_dbuff *dbuff);
-void		ps_print_psl(const t_psl *psl);
-void		ps_get_nb_grad(DBUFF_T nb, DBUFF_T init, char buf[16]);
-void		ps_print_dbuff_content(const t_dbuff *dbuff);
+const char		*ps_action_name(t_action action);
+void			ps_print_dstor(const t_dstor *dstor);
+void			ps_print_dbuff(const t_dbuff *dbuff);
+void			ps_print_psl(const t_psl *psl);
+void			ps_get_nb_grad(DBUFF_T nb, DBUFF_T init, char buf[16]);
+void			ps_print_dbuff_content(const t_dbuff *dbuff);
 
 #endif

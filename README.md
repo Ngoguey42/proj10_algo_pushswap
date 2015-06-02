@@ -14,11 +14,11 @@ put_struct_ps2.c			// Norm checked
 debug.c						// RAS
 debug_dbuff.c				// RAS
 
-set_save.c
-set_solutions.c
-set_solve.c
-set_to_a.c
-set_to_b.c
+set_save.c					// Norm checked
+set_solutions.c				// Norm checked
+set_solve.c					// Norm checked
+set_to_a.c					// Norm checked
+set_to_b.c					// Norm checked
 
 
 todo. track mem leaks

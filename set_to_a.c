@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/17 09:58:13 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/02 12:56:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 14:16:01 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include <unistd.h>
 #define NEXT(val, max) (val == 1 ? max : val - 1)
 
-static DBUFF_T   r_dist(DBUFF_T last, DBUFF_T *ptr)
+static DBUFF_T	r_dist(DBUFF_T last, DBUFF_T *ptr)
 {
-	DBUFF_T  dist;
+	DBUFF_T	dist;
 
 	dist = 0;
 	while (*ptr != last)
@@ -28,10 +28,11 @@ static DBUFF_T   r_dist(DBUFF_T last, DBUFF_T *ptr)
 	return (dist);
 }
 
-static int	recenter_b(t_psl *l, t_action action, DBUFF_T tot, DBUFF_T nnext)
+static int		recenter_b(t_psl *l, t_action action, DBUFF_T tot,
+								DBUFF_T nnext)
 {
 	int		next_moved;
-	
+
 	next_moved = 0;
 	while (tot--)
 	{
@@ -48,7 +49,7 @@ static int	recenter_b(t_psl *l, t_action action, DBUFF_T tot, DBUFF_T nnext)
 	return (next_moved);
 }
 
-static void	recenter_a(t_psl *l, DBUFF_T radist, DBUFF_T rradist)
+static void		recenter_a(t_psl *l, DBUFF_T radist, DBUFF_T rradist)
 {
 	if (radist <= rradist)
 		while (radist--)
@@ -59,7 +60,7 @@ static void	recenter_a(t_psl *l, DBUFF_T radist, DBUFF_T rradist)
 	return ;
 }
 
-void		build_alternatives_to_a(t_tob *tob)
+void			build_alternatives_to_a(t_tob *tob)
 {
 	t_psl	*l;
 	PS_TYPE	next;
@@ -71,7 +72,6 @@ void		build_alternatives_to_a(t_tob *tob)
 	tot_size = AZS + BZS;
 	while (BZS > 0)
 	{
-		
 		next = NEXT(*AZF, tot_size);
 		tmp = r_dist(next, BZF);
 		if (tmp <= BZS - tmp)
@@ -85,6 +85,5 @@ void		build_alternatives_to_a(t_tob *tob)
 	tmp = r_dist(1, AZF);
 	recenter_a(l, tmp, tot_size - tmp);
 	ps_solution_storing(l);
-/* 	ps_free_l(&l, false); //added */
 	return ;
 }
