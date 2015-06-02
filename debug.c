@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:47 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/02 11:55:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 12:31:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	print_dstor_content(const t_dstor *dstor)
 		{
 			if (i != 0)
 				ft_putchar(' ');
-			ft_dprintf(1, "%s", ps_action_name(dstor->buf_rear[i]));
+			ft_putstr(ps_action_name(dstor->buf_rear[i]));
 /* 			ft_dprintf(1, "%s ", ps_action_name(dstor->buf_rear[i])); */
 /* 			if (i != 0 && i % 16 == 0) */
 /* 				ft_putstr_fd("\n       ", 1); */

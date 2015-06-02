@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/02 11:51:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/02 11:51:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 12:54:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int				ps_total_movements(const t_psl *l)
 {
 	static int		total_movements = 0;
 
-	qprintf("%u\n", total_movements);
 	if (l != NULL)
 		total_movements += l->act.zone_size;
 	return (total_movements);
@@ -28,10 +27,7 @@ t_psl			*ps_solution_storing(t_psl *l)
 
 	if (l == NULL)
 		return (saved);
-	ps_total_movements(l);
-	if (saved)
-		qprintf("prev: %u", saved->act.zone_size);
-	qprintf("new: %u\n", l->act.zone_size);
+	(void)ps_total_movements(l);
 	if (saved == NULL)
 		saved = l;
 	else if (l->act.zone_size < saved->act.zone_size)
@@ -56,7 +52,7 @@ void			ps_printbest_solution(void)
 	else
 	{
 		ps_print_psl(l);
-		ps_free_l(&l, true);
+		ps_free_l(&l, true); //dunno
 	}
 	return ;
 }

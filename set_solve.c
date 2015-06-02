@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 12:09:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/17 10:06:39 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 13:21:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ static void		send_to_b(const t_psl *l, t_set *s)
 		send_to_a(way);
 		lst = lst->next;
 	}
+	ft_lstdel(&lst, &ft_lstfreecont); //added
+	ft_lstdel(way->to_a, &ft_lstfreecont); //added
+	ps_free_l(&way->l, true);
 	return ;
 }
 
@@ -46,11 +49,14 @@ void			ps_set_solve(t_psl *l)
 	while (lst)
 	{
 		s = (t_set*)lst->content;
-		(void)s;
-		qprintf("\033[41mset:%2hu %2hu (%2hu)\n\033[0m", s->first, s->last, s->len);
+/* 		(void)s; */
+/* 		qprintf("\033[41mset:%2hu %2hu (%2hu)\n\033[0m", s->first, s->last, s->len); */
 		send_to_b(l, s);
 		lst = lst->next;
 	}
-	ft_lstdel(sets, &ft_lstfreecont);
+	ft_lstdel(s->to_b, &ft_lstfreecont); //added
+	ft_lstdel(&lst, &ft_lstfreecont); //added	
+	ft_lstdel(sets, &ps_free_setlistlink_content); //ca leak ici
+/* 	while (1) (void)1; */
 	return ;	
 }

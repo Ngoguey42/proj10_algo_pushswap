@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/02 12:21:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 13:22:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static void	create_ref(t_psl *ref, size_t len)
 {
 	DBUFF_T	i;
 
-	(void)ft_dbuff_init(&ref->al, len, 0);
+	if (ft_dbuff_init(&ref->al, len, 0))
+		ft_exit("ENOMEM");
 	i = 0;
 	while (i < len)
 	{
@@ -64,6 +65,19 @@ static void	create_ref(t_psl *ref, size_t len)
 	return ;
 }
 
+#include <unistd.h>
+#include <stdio.h>
+
+void		checkLeaks()
+{
+	char	buf[512];
+
+	snprintf(buf, 512, "/usr/bin/leaks %d | tail -n 1 >&2 ", getpid());
+	system(buf);
+	exit(0);
+	return ;
+}
+
 int			main(int ac, char **av)
 {
 	t_corresp	corresp;
@@ -73,18 +87,23 @@ int			main(int ac, char **av)
 
 	put_struct_ps(&ac, av, &corresp);
 	create_ref(&ref, ac);
-	(void)ft_dbuff_init(&psl.al, ac + (ac * 5), ac * 2);
-	(void)ft_dbuff_init(&psl.bl, ac + (ac * 5), ac * 2);
-	(void)ft_dstor_init(&psl.act, 0x20);
+	if (ft_dbuff_init(&psl.al, ac + (ac * 5), ac * 2) ||
+		ft_dbuff_init(&psl.bl, ac + (ac * 5), ac * 2) ||
+		ft_dstor_init(&psl.act, 0x20))
+		ft_exit("ENOMEM");
 	fill_al(&psl.al, corresp.corresp, ac);
 	ft_dbuff_recenter(&psl.al);
 	ps_dup_l(&psl, &brute);
 	if (ps_brute_solve(brute))
 	{
 		ps_print_psl(brute);
+		checkLeaks();
+/* 		while (1) (void)1; */
 		return (0);
 	}
 	ps_set_solve(&psl);
 	ps_printbest_solution();
+	checkLeaks();
+/* 	while (1) (void)1; */
 	return (0);
 }

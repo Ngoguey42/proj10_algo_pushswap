@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:46:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/01 18:00:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 13:05:16 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ void			ft_exit(char *str);
 void			put_a_b_solved(t_corresp *corresp, int ac);
 void			put_struct_ps(int *ac, char **av, t_corresp *corresp);
 void			ps_free_l(t_psl **l, t_bool free_struct);
+void			ps_free_setlistlink_content(void *content, size_t size);
 
 /*
 ** Debug

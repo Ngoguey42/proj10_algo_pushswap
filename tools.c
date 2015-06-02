@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 09:50:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/01 18:11:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/02 13:15:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ void		ps_dup_l(const t_psl *lref, t_psl **ldst)
 
 	if (!(l = (t_psl*)malloc(sizeof(t_psl))))
 		exit(0);
-	(void)ft_dbuff_dup(&lref->al, &l->al);
-	(void)ft_dbuff_dup(&lref->bl, &l->bl);
-	(void)ft_dstor_dup(&lref->act, &l->act);
+	if (ft_dbuff_dup(&lref->al, &l->al) ||
+		ft_dbuff_dup(&lref->bl, &l->bl) ||
+		ft_dstor_dup(&lref->act, &l->act))
+		ft_exit("ENOMEM");
 	*ldst = l;
 	return ;
 }
@@ -60,6 +61,15 @@ void		ps_free_l(t_psl **l, t_bool free_struct)
 	free((*l)->act.buf_rear);
 	if (free_struct)
 		free(*l);
+	return ;
+}
+
+void		ps_free_setlistlink_content(void *content, size_t size)
+{
+	(void)size;
+	(void)content;
+	ft_lstdel(((t_set*)content)->to_b, &ft_lstfreecont);
+	free(content);
 	return ;
 }
 

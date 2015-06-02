@@ -36,13 +36,13 @@ then
 		echo -ne "\t6 : "
 		cmd=`ruby -e "puts (0...6).to_a.shuffle.join(' ')"`
 		./push_swap $cmd | wc -w |tr -d '\n'
-		echo -ne "\t\t\t\t7 : "
-		cmd=`ruby -e "puts (0...7).to_a.shuffle.join(' ')"`
-		./push_swap -i $cmd | wc -w |tr -d '\n'
-		echo -ne "\t10 : "
-		cmd=`ruby -e "puts (0...10).to_a.shuffle.join(' ')"`
-		./push_swap -i $cmd | wc -w |tr -d '\n'
-		echo -ne "\t\t\t\t7 : "
+		# echo -ne "\t\t\t\t7 : "
+		# cmd=`ruby -e "puts (0...7).to_a.shuffle.join(' ')"`
+		# ./push_swap -i $cmd | wc -w |tr -d '\n'
+		# echo -ne "\t10 : "
+		# cmd=`ruby -e "puts (0...10).to_a.shuffle.join(' ')"`
+		# ./push_swap -i $cmd | wc -w |tr -d '\n'
+		echo -ne "\t7 : "
 		cmd=`ruby -e "puts (0...7).to_a.shuffle.join(' ')"`
 		./push_swap $cmd | wc -w |tr -d '\n'
 		echo -ne "\t10 : "
